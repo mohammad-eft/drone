@@ -9,7 +9,7 @@ const exists = document.getElementById('exists');
 
 const sortBtn = document.querySelectorAll('.sort-btn');
 
-const productsElement = document.getElementById('products');
+const productsElement = document.getElementById('products');    
 const empty = document.getElementById('empty');
 const productCount = document.getElementById('productCount');
 
@@ -94,43 +94,47 @@ function createProductCard(product) {
     link.href = url + 'product/show/' + product.id;
 
     link.className = `
-        product-card group relative min-w-0 bg-white
-        border border-[#E2E8F0] rounded-2xl p-3 md:p-4
+        product-card group relative min-w-0 bg-[#191D1B]
+        border border-[#2A302C] rounded-2xl p-3 md:p-4
         transition-all duration-300
-        hover:border-[#0055AA]/40
-        hover:shadow-[0_12px_35px_rgba(1,3,72,0.07)]
+        hover:border-[#00F477]/50
+        hover:shadow-[0_12px_35px_rgba(0,244,119,0.06)]
         hover:-translate-y-1
     `;
 
+    // Discount
     let discountHTML = '';
 
     if (product.percent) {
         discountHTML = `
-            <span class="absolute top-3 right-3 z-10 bg-[#E5232E]
-                text-white rounded-lg text-[10px] font-bold
+            <span class="absolute top-3 right-3 z-10 bg-[#00F477]
+                text-[#06140B] rounded-lg text-[10px] font-black
                 px-2 py-1 in-fa">
                 ${product.percent}٪ تخفیف
             </span>
         `;
     }
 
+    // Price
     let priceHTML = '';
 
     if (product.secondary_price) {
 
         priceHTML = `
             <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] text-slate-400">قیمت فروش</span>
-                <span class="text-[10px] text-slate-400 line-through in-fa">
+                <span class="text-[10px] text-[#929B95]">قیمت فروش</span>
+
+                <span class="text-[10px] text-[#929B95] line-through in-fa">
                     ${product.primary_price}
                 </span>
             </div>
 
             <div class="flex items-end justify-between gap-1">
-                <strong class="text-sm md:text-base font-black text-[#010348] in-fa">
+                <strong class="text-sm md:text-base font-black text-[#00F477] in-fa">
                     ${product.secondary_price}
                 </strong>
-                <span class="text-[10px] text-slate-500">تومان</span>
+
+                <span class="text-[10px] text-[#929B95]">تومان</span>
             </div>
         `;
 
@@ -138,28 +142,32 @@ function createProductCard(product) {
 
         priceHTML = `
             <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] text-slate-400">قیمت محصول</span>
+                <span class="text-[10px] text-[#929B95]">قیمت محصول</span>
             </div>
 
             <div class="flex items-end justify-between gap-1">
-                <strong class="text-sm md:text-base font-black text-[#010348] in-fa">
+                <strong class="text-sm md:text-base font-black text-[#00F477] in-fa">
                     ${product.primary_price ?? 'تماس بگیرید'}
                 </strong>
-                <span class="text-[10px] text-slate-500">
+
+                <span class="text-[10px] text-[#929B95]">
                     ${product.primary_price ? 'تومان' : ''}
                 </span>
             </div>
         `;
     }
 
+    // Stock
     let stockHTML = '';
 
     if (product.count > 0) {
 
         stockHTML = `
             <span class="flex items-center gap-1.5 text-[10px]
-                text-emerald-600 font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                text-[#00F477] font-semibold">
+
+                <span class="w-1.5 h-1.5 rounded-full bg-[#00F477]"></span>
+
                 موجود در انبار
             </span>
         `;
@@ -168,17 +176,21 @@ function createProductCard(product) {
 
         stockHTML = `
             <span class="flex items-center gap-1.5 text-[10px]
-                text-red-500 font-semibold">
-                <span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                text-red-400 font-semibold">
+
+                <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
+
                 ناموجود
             </span>
         `;
     }
 
+    // Product card HTML
     link.innerHTML = `
         ${discountHTML}
 
-        <div class="relative bg-[#F7F9FC] rounded-xl overflow-hidden mb-4">
+        <div class="relative bg-[#101412] rounded-xl overflow-hidden mb-4">
+
             <img src=""
                 alt=""
                 loading="lazy"
@@ -186,32 +198,40 @@ function createProductCard(product) {
                     transition-transform duration-500 group-hover:scale-105">
 
             <div class="absolute bottom-2 left-2 w-7 h-7 rounded-lg
-                bg-white/90 text-[#0055AA] flex items-center justify-center
+                bg-[#202522] text-[#00F477] flex items-center justify-center
                 opacity-0 group-hover:opacity-100 transition">
+
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="1.8">
+
                     <path d="M7 17 17 7M7 7h10v10"/>
+
                 </svg>
             </div>
         </div>
 
         <h3 class="product-title text-xs md:text-[13px] font-bold
-            text-[#010348] leading-7 h-[54px] overflow-hidden
-            line-clamp-2 group-hover:text-[#0055AA] transition">
+            text-[#F4F7F5] leading-7 h-[54px] overflow-hidden
+            line-clamp-2 group-hover:text-[#00F477] transition">
         </h3>
 
         <div class="mt-4 pt-3 border-t border-dashed
-            border-[#E2E8F0] min-h-[74px]">
+            border-[#2A302C] min-h-[74px]">
+
             ${priceHTML}
+
         </div>
 
         <div class="flex items-center justify-between gap-2 mt-3
-            pt-3 border-t border-[#E2E8F0]">
+            pt-3 border-t border-[#2A302C]">
+
             ${stockHTML}
 
-            <span class="text-[10px] text-[#0055AA] font-bold
+            <span class="text-[10px] text-[#00F477] font-bold
                 group-hover:translate-x-[-3px] transition">
+
                 مشاهده <span class="text-sm">←</span>
+
             </span>
         </div>
     `;
@@ -232,7 +252,6 @@ function createProductCard(product) {
 // --------------------------------------------------
 
 function getFilters() {
-    
 
     productsElement.classList.add('opacity-50', 'pointer-events-none');
 
@@ -263,6 +282,7 @@ function getFilters() {
             } else {
 
                 empty.classList.remove('hidden');
+
             }
 
             if (productCount) {
@@ -302,6 +322,7 @@ categories.forEach(category => {
                 hasAny = true;
 
                 categoryObj[index] = cat.dataset.filter;
+
             }
 
         });
@@ -443,17 +464,22 @@ sortBtn.forEach(btn => {
 
         sortBtn.forEach(button => {
 
-            button.classList.remove('font-black', 'text-[#0055AA]', 'bg-[#EAF2FF]');
-            button.classList.add('text-slate-500');
+            button.classList.remove(
+                'font-black',
+                'text-[#00F477]',
+                'bg-[#202522]'
+            );
+
+            button.classList.add('text-[#929B95]');
 
         });
 
-        this.classList.remove('text-slate-500');
+        this.classList.remove('text-[#929B95]');
 
         this.classList.add(
             'font-black',
-            'text-[#0055AA]',
-            'bg-[#EAF2FF]'
+            'text-[#00F477]',
+            'bg-[#202522]'
         );
 
         window.filters.sortBy = this.dataset.sortBy;
@@ -503,19 +529,24 @@ if (resetFilters) {
 
         sortBtn.forEach((btn, index) => {
 
-            btn.classList.remove('font-black', 'text-[#0055AA]', 'bg-[#EAF2FF]', 'text-slate-500');
+            btn.classList.remove(
+                'font-black',
+                'text-[#00F477]',
+                'bg-[#202522]',
+                'text-[#929B95]'
+            );
 
             if (index === 0) {
 
                 btn.classList.add(
                     'font-black',
-                    'text-[#0055AA]',
-                    'bg-[#EAF2FF]'
+                    'text-[#00F477]',
+                    'bg-[#202522]'
                 );
 
             } else {
 
-                btn.classList.add('text-slate-500');
+                btn.classList.add('text-[#929B95]');
 
             }
 
