@@ -295,7 +295,7 @@ class ProductController extends Controller
     public function index()
     {
         $categories = category::with('products')->has('products')->get();
-        $products = product::all();
+        $products = product::orderBy('created_at', 'desc')->get();
         foreach ($products as $product) {
             if ($product->media->isNotEmpty()) {
                 foreach ($product->media as $media) {
