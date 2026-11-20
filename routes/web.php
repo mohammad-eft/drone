@@ -203,7 +203,7 @@ Route::group([
     Route::post('/updateOrcreate', 'updateOrcreate')->name('updateOrcreate');
     Route::get('/aboutUs', 'index')->name('list');
     Route::get('/delete/{aboutUs}', 'delete')->name('delete');
-    Route::get('/clientList', 'clientList')->name('clientList')->withoutMiddleware([AuthMiddleware::class]);
+    Route::get('/', 'clientList')->name('clientList')->withoutMiddleware([AuthMiddleware::class]);
 });
 
 ///contactUs
