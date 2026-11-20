@@ -15,14 +15,14 @@
         {{-- ========================= HERO ========================= --}}
         <section class="diar-hero max-w-[1800px] w-11/12 mx-auto relative overflow-hidden">
             <div class="diar-hero-copy">
-                <span class="diar-hero-eyebrow"><i></i> PREMIUM DRONE COMPONENTS</span>
+                {{-- <span class="diar-hero-eyebrow"><i></i> PREMIUM DRONE COMPONENTS</span> --}}
                 <h1>{{ $setting['heroTitle'] }}</h1>
                 <p>{{ $setting['heroSubtitle'] }}</p>
-                <div class="diar-hero-points">
+                {{-- <div class="diar-hero-points">
                     <span>✦ قطعات تخصصی</span>
                     <span>✓ کیفیت تضمین‌شده</span>
                     <span>⚡ ارسال سریع</span>
-                </div>
+                </div> --}}
                 <div class="diar-hero-actions">
                     <a href="{{ $setting['heroPrimaryButtonLink'] }}" class="diar-hero-primary">
                         {{ $setting['heroPrimaryButton'] }} <span>←</span>
@@ -35,9 +35,9 @@
             <div class="diar-hero-visual">
                 <div class="diar-hero-glow"></div>
                 <img src="{{ asset('storage/' . $setting['heroBanner']) }}" alt="{{ $setting['heroTitle'] }}">
-                <span class="diar-hero-image-caption">CIRCUITFLY / DRONE TECHNOLOGY</span>
+                {{-- <span class="diar-hero-image-caption">CIRCUITFLY / DRONE TECHNOLOGY</span> --}}
             </div>
-            <div class="diar-hero-pagination"><span></span><i></i><i></i><i></i></div>
+            {{-- <div class="diar-hero-pagination"><span></span><i></i><i></i><i></i></div> --}}
         </section>
 
         {{-- ========================= PACKS ========================= --}}
@@ -203,11 +203,13 @@
                                     <button onclick="addToCart(this)"
                                         class="diar-cart-button w-full px-4 h-full flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 group">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                            class="lg:size-4 size-3 fill-current transition-all duration-300">
-                                            <path
-                                                d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 0 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 0 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 0 1-48 0zm80 0a56 56 0 1 0-112 0 56 56 0 0 0 112 0z" />
-                                        </svg>
+                                        <svg class="size-4 shrink-0" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
+                <circle cx="10" cy="20" r="1"/>
+                <circle cx="18" cy="20" r="1"/>
+                <path d="M14 9v5M11.5 11.5h5"/>
+            </svg>
 
                                         <span class="lg:text-sm text-[10px] font-bold transition-all duration-300">
                                             افزودن به سبد خرید
@@ -243,10 +245,10 @@
             <div
                 class="lg:w-1/2 w-full min-h-full flex lg:justify-start justify-center items-center lg:pr-20 lg:py-4 max-lg:px-5 max-lg:pt-7 max-lg:pb-8">
                 <div class="w-full h-full flex flex-col gap-4 justify-center lg:items-start items-center">
-
+{{-- 
                     <span class="diar-feature-label">
                         انتخاب حرفه‌ای برای حرفه‌ای‌ها
-                    </span>
+                    </span> --}}
 
                     <h3 class="lg:text-4xl text-2xl font-bold diar-feature-title">
                         {{ $setting['secondBannerTitle'] }}
@@ -353,11 +355,13 @@
                                     <button onclick="addToCart(this)"
                                         class="diar-cart-button w-full px-4 h-full flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 group">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
-                                            class="lg:size-4 size-3 fill-current transition-all duration-300">
-                                            <path
-                                                d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 0 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 0 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 0 1-48 0zm80 0a56 56 0 1 0-112 0 56 56 0 0 0 112 0z" />
-                                        </svg>
+                                        <svg class="size-4 shrink-0" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
+                <circle cx="10" cy="20" r="1"/>
+                <circle cx="18" cy="20" r="1"/>
+                <path d="M14 9v5M11.5 11.5h5"/>
+            </svg>
 
                                         <span class="lg:text-sm text-[10px] font-bold transition-all duration-300">
                                             افزودن به سبد خرید
@@ -382,49 +386,70 @@
 
 
         {{-- ========================= SIDE BANNERS ========================= --}}
-        <section class="w-full flex justify-center">
-            <div class="max-w-[1800px] w-11/12 mx-auto lg:h-60 flex max-lg:flex-col justify-between gap-4">
+        
+        
+        <section class="w-full flex justify-center py-5 bg-[#090C0A]">
+            <div class="max-w-[1800px] w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 lg:h-64">
 
+                {{-- Right Banner --}}
                 <a href="{{ $setting['rightBannerLink'] }}"
-                    class="diar-side-banner lg:w-5/12 w-full rounded-2xl h-full flex justify-center items-center overflow-hidden">
-                    <img class="w-full h-full rounded-xl object-cover"
-                        src="{{ asset('storage/' . $setting['rightBanner']) }}" alt="">
+                    class="group relative lg:col-span-5 w-full h-48 lg:h-full rounded-2xl overflow-hidden bg-[#191D1B] border border-[#2A302C]">
+
+                    <img src="{{ asset('storage/' . $setting['rightBanner']) }}"
+                        alt=""
+                        class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#090C0A]/40 via-transparent to-transparent"></div>
+
+                    <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/5"></div>
                 </a>
 
-                <div
-                    class="diar-side-content lg:w-7/12 w-full h-full relative flex max-lg:flex-col items-center gap-3 rounded-xl overflow-hidden">
+                {{-- Left Banner --}}
+                <div class="lg:col-span-7 relative w-full min-h-[220px] lg:h-full flex max-sm:flex-col items-center overflow-hidden rounded-2xl bg-[#191D1B] border border-[#2A302C]">
 
-                    <img class="h-full w-full lg:w-1/2 rounded-r-xl object-cover max-h-full"
-                        src="{{ asset('storage/' . $setting['leftBanner']) }}" alt="">
+                    {{-- Image --}}
+                    <div class="relative w-full sm:w-1/2 h-44 sm:h-full overflow-hidden">
+                        <img src="{{ asset('storage/' . $setting['leftBanner']) }}"
+                            alt=""
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
 
-                    <div class="lg:w-1/2 w-full flex flex-col gap-3 lg:items-start items-center p-5">
+                        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#191D1B]/30"></div>
+                    </div>
 
-                        <span class="lg:text-xl text-md font-bold text-(--primary-text-color)">
+                    {{-- Content --}}
+                    <div class="relative w-full sm:w-1/2 flex flex-col items-start justify-center gap-3 p-5 sm:p-6 lg:p-7">
+
+                        {{-- <span class="inline-flex items-center gap-2 text-[11px] font-bold text-[#00F477]">
+                            <span class="w-1.5 h-1.5 rounded-full bg-[#00F477] shadow-[0_0_10px_#00F477]"></span>
+                            CIRCUITFLY
+                        </span> --}}
+
+                        <h3 class="text-base lg:text-xl font-extrabold leading-8 text-[#F4F7F5]">
                             {{ $setting['leftBannerTitle'] }}
-                        </span>
+                        </h3>
 
-                        <span class="lg:text-md text-xs text-(--secondary-text-color)">
+                        <p class="text-xs lg:text-sm leading-6 text-[#929B95]">
                             {{ $setting['leftBannerSubtitle'] }}
-                        </span>
+                        </p>
 
                         <a href="{{ $setting['leftBannerButtonLink'] }}"
-                            class="diar-side-button w-1/2 rounded-xl flex items-center justify-center gap-2 mt-3 p-2">
+                            class="group/btn inline-flex items-center justify-center gap-3 mt-2 px-5 py-2.5 rounded-xl bg-[#00F477] hover:bg-[#39FF98] text-[#06140B] text-xs lg:text-sm font-extrabold transition-all duration-300 shadow-[0_4px_18px_rgba(0,244,119,0.12)] hover:shadow-[0_5px_24px_rgba(0,244,119,0.25)] hover:-translate-y-0.5">
 
-                            <span class="lg:text-md text-xs">
-                                {{ $setting['leftBannerButton'] }}
-                            </span>
+                            <span>{{ $setting['leftBannerButton'] }}</span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
-                                class="lg:size-5 size-3 fill-current">
-                                <path
-                                    d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.2 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z" />
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512"
+                                class="w-3.5 h-3.5 fill-current transition-transform duration-300 group-hover/btn:-translate-x-1">
+                                <path d="M7.4 273.4C2.7 268.8 0 262.6 0 256s2.7-12.8 7.4-17.4l176-168c9.6-9.2 24.8-8.8 33.9 .8s8.8 24.8-.8 33.9L83.9 232 424 232c13.3 0 24 10.7 24 24s-10.7 24-24 24L83.9 280 216.6 406.6c9.2 9.2 9.9 24.3 .8 33.9s-24.3 9.9-33.9 .8l-176-168z"/>
                             </svg>
-
                         </a>
                     </div>
                 </div>
+
             </div>
         </section>
+
+
 
 
         {{-- ========================= TWO PROMO CARDS ========================= --}}

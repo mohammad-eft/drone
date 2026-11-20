@@ -1,594 +1,880 @@
-let totalPriceEl = document.getElementById('totalPriceEl')
-let discountEl = document.getElementById('discountEl')
-let addPackToCartBtn = document.getElementById('addPackToCartBtn')
-let cartItemsBlock = document.getElementById('cartItemsBlock')
-let cartLink = document.getElementById('cartLink')
-orderBasket = document.getElementById('orderBasket')
-localProducts = JSON.parse(localStorage.getItem('products'))
-localPacks = JSON.parse(localStorage.getItem('packs'))
-let popupFlag = false
+
+/* =========================================================
+   DIAR ABZAR — CART SYSTEM
+========================================================= */
+
+let popupFlag = false;
+
+let cartLink = document.getElementById('cartLink');
+orderBasket = document.getElementById('orderBasket');
+
+let totalPriceEl = document.getElementById('totalPriceEl');
+let discountEl = document.getElementById('discountEl');
+
+let cartItemsBlock = document.getElementById('cartItemsBlock');
+
+let addPackToCartBtn = document.getElementById('addPackToCartBtn');
+
+/* =========================================================
+   STORAGE HELPERS
+========================================================= */
+
+function readCart(key) {
+    try {
+        const data = JSON.parse(localStorage.getItem(key));
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveCart(key, items) {
+    localStorage.setItem(key, JSON.stringify(items));
+}
+
+function getItemPrice(item) {
+    return Number(item.secondary_price || item.primary_price) || 0;
+}
+
+function getItemCount(item) {
+    return Number(item.count) || 0;
+}
+
+function updateCartState() {
+
+    localProducts = readCart('products');
+    localPacks = readCart('packs');
+
+    totalCartQuantity = 0;
+
+    localProducts.forEach(item => {
+        totalCartQuantity += Number(item.quantity) || 0;
+    });
+
+    localPacks.forEach(item => {
+        totalCartQuantity += Number(item.quantity) || 0;
+    });
+
+    if (typeof updateCartBadge === 'function') {
+        updateCartBadge();
+    }
+
+    
+}
+
+/* =========================================================
+   QUANTITY HTML
+========================================================= */
+function getQuantityControl(cart, type) {
+
+    const isPack = type === 'pack';
+
+    const functionName = isPack ? 'setPackCount' : 'setCount';
+
+    const quantity = Number(cart.quantity) || 1;
+    const maxCount = getItemCount(cart);
+
+    const isMax = quantity >= maxCount;
+
+    return `
+        <div class="w-full p-1.5 h-full flex gap-2 justify-center items-center
+                    rounded-xl bg-[#101412] border border-[#2A302C]
+                    transition-all duration-300">
+
+            <button
+                type="button"
+                onclick="event.stopPropagation(); ${functionName}(this)"
+                data-state="+"
+                class="w-1/3 h-5 rounded-lg flex justify-center items-center
+                       text-[#00F477] hover:bg-[#00F477] hover:text-[#06140B]
+                       transition-all duration-200 text-lg font-bold
+                       ${isMax ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}"
+                ${isMax ? 'disabled' : ''}>
+                +
+            </button>
+
+            <input
+                type="number"
+                class="w-1/3 h-9 rounded-lg bg-transparent text-[#F4F7F5]
+                       text-sm text-center outline-none in-fa font-bold"
+                readonly
+                value="${quantity}">
+
+            <button
+                type="button"
+                onclick="event.stopPropagation(); ${functionName}(this)"
+                data-state="-"
+                class="w-1/3 h-5 rounded-lg flex justify-center items-center
+                       text-[#00F477] hover:bg-[#00F477] hover:text-[#06140B]
+                       transition-all duration-200 text-lg font-bold cursor-pointer">
+                -
+            </button>
+
+        </div>
+    `;
+}
+
+/* =========================================================
+   ADD TO CART HTML
+   SAME DESIGN AS SINGLE PRODUCT PAGE
+========================================================= */
+
+function getAddToCartHTML(type, count) {
+
+    const functionName = type === 'pack'
+        ? 'addPackToCart'
+        : 'addToCart';
+
+    if (Number(count) <= 0) {
+        return `
+            <button type="button" disabled
+                class="w-full h-12 rounded-xl bg-[#202522]
+                       border border-[#2A302C] text-[#929B95]
+                       text-xs font-bold cursor-not-allowed">
+                عدم موجودی
+            </button>
+        `;
+    }
+
+    return `
+        <button type="button"
+            onclick="${functionName}(this)"
+            class="product-primary-btn w-full h-12 rounded-xl
+                   flex items-center justify-center gap-1.5
+                   font-bold text-xs">
+
+            <svg class="size-4 shrink-0" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
+                <circle cx="10" cy="20" r="1"/>
+                <circle cx="18" cy="20" r="1"/>
+                <path d="M14 9v5M11.5 11.5h5"/>
+            </svg>
+
+            <span>افزودن به سبد خرید</span>
+
+        </button>
+    `;
+}
+
+/* =========================================================
+   RENDER PRODUCT CONTROLS
+========================================================= */
+
+function renderProductControls(productId) {
+
+    const products = readCart('products');
+
+    const product = products.find(item =>
+        String(item.id) === String(productId)
+    );
+
+    document.querySelectorAll('.addToCartBtns[data-product-id]').forEach(container => {
+
+        if (String(container.dataset.productId) !== String(productId)) {
+            return;
+        }
+
+        if (product) {
+            container.innerHTML = getQuantityControl(product, 'product');
+        } else {
+            container.innerHTML = getAddToCartHTML(
+                'product',
+                container.dataset.count
+            );
+        }
+    });
+}
+
+/* =========================================================
+   RENDER PACK CONTROLS
+========================================================= */
+
+function renderPackControls(packId) {
+
+    const packs = readCart('packs');
+
+    const pack = packs.find(item =>
+        String(item.id) === String(packId)
+    );
+
+    document.querySelectorAll('.addPackToCartBtn[data-pack-id]').forEach(container => {
+
+        if (String(container.dataset.packId) !== String(packId)) {
+            return;
+        }
+
+        if (pack) {
+            container.innerHTML = getQuantityControl(pack, 'pack');
+        } else {
+            container.innerHTML = getAddToCartHTML(
+                'pack',
+                container.dataset.count
+            );
+        }
+    });
+}
+
+/* =========================================================
+   ADD PRODUCT TO CART
+========================================================= */
 
 function addToCart(btn) {
-    let container = btn.closest('.addToCartBtns')
-    if (!container) return
 
-    let productId = container.dataset.productId
-    if (!productId) return
-    cartLink.classList.remove('hidden')
-    btn.removeAttribute('onclick')
-    btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
+    const container = btn.closest('.addToCartBtns');
 
+    if (!container) return;
+
+    if (btn.dataset.loading === 'true') return;
+
+    const productId = container.dataset.productId;
+
+    if (!productId) return;
+
+    btn.dataset.loading = 'true';
+    btn.disabled = true;
+
+    const originalHTML = btn.innerHTML;
+
+    btn.innerHTML = `
+        <span class="flex items-center justify-center gap-2">
+            <span class="relative flex items-center justify-center w-5 h-5">
+                <span class="absolute inset-0 rounded-full border-[2.5px]
+                            border-[#06140B]/20"></span>
+
+                <span class="absolute inset-0 rounded-full border-[2.5px]
+                            border-[#06140B] border-t-transparent
+                            animate-spin"></span>
+            </span>
+
+            <span class="text-xs font-bold text-[#06140B]">
+                در حال افزودن...
+            </span>
+        </span>`
     $.ajax({
+
         url: api + 'findProduct/' + productId,
-        type: "GET",
-        dataType: "json",
+        type: 'GET',
+        dataType: 'json',
+
         success: function (response) {
-            if (orderBasket && orderBasket.children[1]) {
-                let quan = parseInt(orderBasket.children[1].innerText) || 0
-                quan += 1
-                totalCartQuantity++
-                orderBasket.children[1].innerText = totalCartQuantity
+
+            if (!response || !response.id) {
+                restoreButton();
+                return;
             }
 
-            response.quantity = 1
+            const products = readCart('products');
 
-            document.querySelectorAll('.addToCartBtns').forEach(button => {
-                if (button.dataset.productId != productId) return
+            const existing = products.find(item =>
+                String(item.id) === String(response.id)
+            );
 
-                let input = button.querySelector('input[type=number]')
-                if (input) {
-                    input.value = response.quantity
-                } else {
-                    button.innerHTML = `
-                        <div class="w-full p-2 h-full transition-all duration-300 hover:bg-(--green-btn) group cursor-pointer bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl">
-                            <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                            <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
-                            <button onclick="setCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-                        </div>
-                    `
-                }
-                if (response.quantity == response.count) {
-                    button.children[0].children[0].disabled = true
-                    button.children[0].children[0].classList.remove('cursor-pointer')
-                    button.children[0].children[0].classList.add('cursor-no-drop')
-                } else {
-                    button.children[0].children[0].disabled = false
-                    button.children[0].children[0].classList.remove('cursor-no-drop')
-                    button.children[0].children[0].classList.add('cursor-pointer')
-                }
-            })
-
-
-            let products = []
-            if (localStorage.getItem('products')) {
-                try {
-                    products = JSON.parse(localStorage.getItem('products')) || []
-                } catch (e) {
-                    products = []
-                }
-            }
-
-            let existing = products.find(pro => String(pro.id) === String(response.id))
             if (existing) {
-                existing.quantity = (existing.quantity || 1) + 1
+
+                existing.quantity = Number(existing.quantity || 0) + 1;
+
             } else {
-                response.quantity = 1
-                products.push(response)
+
+                response.quantity = 1;
+                products.push(response);
+
             }
-            localStorage.setItem('products', JSON.stringify(products))
-            localProducts = products
+
+            const product = products.find(item =>
+                String(item.id) === String(response.id)
+            );
+
+            const maxCount = getItemCount(product);
+
+            if (product.quantity > maxCount) {
+                product.quantity = maxCount;
+            }
+
+            saveCart('products', products);
+
+            updateCartState();
+
+            renderProductControls(productId);
+
         },
+
         error: function () {
-            if (container.querySelector('button')) {
-                container.querySelector('button').setAttribute('onclick', 'addToCart(this)')
-                container.querySelector('button').innerHTML = `
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) group-hover:fill-white transition-all duration-300">
-                            <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z"></path>
-                        </svg>
-                    </div>
-                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                `
-            }
-            console.log('failed to load data')
+
+            restoreButton();
+
+            console.error('Product request failed.');
+
         }
-    })
+
+    });
+
+    function restoreButton() {
+
+        btn.dataset.loading = 'false';
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+
+    }
 }
+
+function closeCartPopup(e = null) {
+
+    if (!orderBasket || !orderBasket.parentElement) return;
+
+    const popup = orderBasket.parentElement.children[1];
+
+    if (!popup) return;
+
+    // اگر کلیک از بیرون اتفاق افتاده باشد
+    if (
+        e &&
+        (
+            orderBasket.contains(e.target) ||
+            popup.contains(e.target)
+        )
+    ) {
+        return;
+    }
+
+    popupFlag = false;
+
+    popup.classList.add('invisible', 'opacity-0');
+}
+
+/* =========================================================
+   CHANGE PRODUCT QUANTITY
+========================================================= */
 
 function setCount(btn) {
-    let container = btn.closest('.addToCartBtns')
-    if (!container) return
 
-    let productId = container.dataset.productId
-    if (!productId) return
+    const container = btn.closest('.addToCartBtns');
 
-    localProducts = JSON.parse(localStorage.getItem('products')) || []
+    if (!container) return;
 
-    let product = localProducts.find(p => String(p.id) === String(productId))
-    if (!product) return
+    const productId = container.dataset.productId;
 
-    let finalPrice = product.secondary_price ? product.secondary_price : product.primary_price
+    if (!productId) return;
+
+    const products = readCart('products');
+
+    const product = products.find(item =>
+        String(item.id) === String(productId)
+    );
+
+    if (!product) return;
+
+    const currentQuantity = Number(product.quantity) || 0;
+    const maxCount = getItemCount(product);
+
+    let newQuantity = currentQuantity;
 
     if (btn.dataset.state === '+') {
-        btn.parentElement.children[1].value++
-        product.quantity++
-        totalCartQuantity++
-        if (totalPriceEl) {
-            let currentPrice = parseInt(totalPriceEl.innerText) || 0
-            totalPriceEl.innerText = currentPrice + finalPrice
-        }
-    }
 
-    if (btn.dataset.state === '-') {
-        btn.parentElement.children[1].value--
-        product.quantity--
-        totalCartQuantity--
-        if (totalPriceEl) {
-            let currentPrice = parseInt(totalPriceEl.innerText) || 0
-            totalPriceEl.innerText = currentPrice - finalPrice
-        }
-    }
+        if (currentQuantity >= maxCount) return;
 
-    if (product.quantity == product.count) {
-        btn.disabled = true
-        btn.classList.remove('cursor-pointer')
-        btn.classList.add('cursor-no-drop')
+        newQuantity++;
+
+    } else if (btn.dataset.state === '-') {
+
+        if (currentQuantity <= 0) return;
+
+        newQuantity--;
+
     } else {
-        btn.parentElement.children[0].disabled = false
-        btn.parentElement.children[0].classList.remove('cursor-no-drop')
-        btn.parentElement.children[0].classList.add('cursor-pointer')
+
+        return;
+
     }
 
-    document.querySelectorAll('.addToCartBtns').forEach(button => {
-        if (button === container) return
-        if (String(button.dataset.productId) !== String(productId)) return
+    const difference = newQuantity - currentQuantity;
 
-        let input = button.querySelector('input[type=number]')
-        if (input) {
-            input.value = btn.parentElement.children[1].value
-        }
-    })
+    /* Update price */
 
-    localStorage.setItem('products', JSON.stringify(localProducts))
+    if (totalPriceEl) {
 
-    if (btn.parentElement.children[1].value == 0) {
-        // if (orderBasket && orderBasket.children[1]) {
-        //     orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
-        // }
+        const currentPrice =
+            Number(totalPriceEl.innerText.replace(/[^\d]/g, '')) || 0;
 
-        localProducts = localProducts.filter(cart => String(cart.id) !== String(productId))
-        localStorage.setItem('products', JSON.stringify(localProducts))
+        const finalPrice = getItemPrice(product);
 
-        if (!popupFlag) {
-            let initialHtml = `
-                <button onclick="addToCart(this)" class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                            <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                </button>
-            `
+        totalPriceEl.innerText = Math.max(
+            0,
+            currentPrice + (difference * finalPrice)
+        ).toLocaleString('en-US');
 
-            document.querySelectorAll('.addToCartBtns').forEach(button => {
-                if (String(button.dataset.productId) === String(productId)) {
-                    button.innerHTML = initialHtml
-                }
-            })
-            if (window.currentPage == 'cart') {
-                document.querySelectorAll('.cartPages').forEach(item => {
-                    if (item.dataset.productId == productId) {
-                        item.remove()
-                    }
-                })
-            }
-        } else {
-            let parentItem = btn.closest('.parentItem')
-            if (parentItem) {
-                parentItem.remove()
-            }
-
-            if (window.currentPage == 'cart') {
-                document.querySelectorAll('.cartPages').forEach(item => {
-                    if (item.dataset.productId == productId) {
-                        item.remove()
-                    }
-                })
-            }
-            let initialHtml = `
-                <button onclick="addToCart(this)" class="w-full px-4 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
-                    <div>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                            <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-                </button>
-            `
-
-            document.querySelectorAll('.addToCartBtns').forEach(button => {
-                if (String(button.dataset.productId) === String(productId) && !button.closest('.parentItem')) {
-                    button.innerHTML = initialHtml
-                }
-            })
-        }
     }
-    orderBasket.children[1].innerText = totalCartQuantity
+
+    /* Update quantity */
+
+    if (newQuantity <= 0) {
+
+        const updatedProducts = products.filter(item =>
+            String(item.id) !== String(productId)
+        );
+
+        saveCart('products', updatedProducts);
+
+        if (window.currentPage === 'cart') {
+
+            document.querySelectorAll('.cartPages').forEach(item => {
+
+                if (String(item.dataset.productId) === String(productId)) {
+                    item.remove();
+                }
+
+            });
+
+        }
+
+        if (popupFlag) {
+
+            const parentItem = btn.closest('.parentItem');
+
+            if (parentItem) parentItem.remove();
+
+        }
+
+    } else {
+
+        product.quantity = newQuantity;
+
+        saveCart('products', products);
+
+    }
+
+    updateCartState();
+
+    renderProductControls(productId);
+
+    /* Close popup when cart is empty */
+    if (totalCartQuantity <= 0) {
+        closeCartPopup();
+    }
+
 }
+
+/* =========================================================
+   ADD PACK TO CART
+========================================================= */
 
 function addPackToCart(btn) {
-    let container = btn.closest('.addPackToCartBtn')
-    if (!container) return
 
-    let packId = container.dataset.packId
-    if (!packId) return
-    cartLink.classList.remove('hidden')
+    const container = btn.closest('.addPackToCartBtn');
 
-    btn.innerHTML = `<div class="w-5 h-5 border-2 border-white border-t-(--primary-text-color) rounded-full animate-spin"></div>`
+    if (!container) return;
+
+    if (btn.dataset.loading === 'true') return;
+
+    const packId = container.dataset.packId;
+
+    if (!packId) return;
+
+    btn.dataset.loading = 'true';
+    btn.disabled = true;
+
+    const originalHTML = btn.innerHTML;
+
+    btn.innerHTML = `
+        <div class="w-5 h-5 border-2 border-[#06140B]
+                    border-t-transparent rounded-full animate-spin">
+        </div>
+    `;
 
     $.ajax({
+
         url: api + 'findPack/' + packId,
-        type: "GET",
-        dataType: "json",
+        type: 'GET',
+        dataType: 'json',
+
         success: function (response) {
-            // if (orderBasket && orderBasket.children[1]) {
-            //     orderBasket.children[1].innerText = (parseInt(orderBasket.children[1].innerText) || 0) + 1
-            // }
-            totalCartQuantity++
-            orderBasket.children[1].innerText = totalCartQuantity
 
-            response.quantity = 1
-
-            document.querySelectorAll('.addPackToCartBtn').forEach(button => {
-                if (String(button.dataset.packId) !== String(packId)) return
-
-                let input = button.querySelector('input[type=number]')
-                if (input) {
-                    input.value = response.quantity
-                } else {
-                    let innerBtn = button.querySelector('button')
-                    if (innerBtn) {
-                        innerBtn.removeAttribute('onclick')
-                        innerBtn.innerHTML = `
-                            <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="+">+</button>
-                            <input type="number" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white text-sm text-center outline-none in-fa" readonly value="${response.quantity}">
-                            <button onclick="setPackCount(this)" class="w-1/3 transition-all duration-300 text-(--primary-text-color) group-hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer" data-state="-">-</button>
-                        `
-                    }
-                }
-                if (response.quantity == response.count) {
-                    button.children[0].children[0].disabled = true
-                    button.children[0].children[0].classList.remove('cursor-pointer')
-                    button.children[0].children[0].classList.add('cursor-no-drop')
-                } else {
-                    button.children[0].children[0].disabled = false
-                    button.children[0].children[0].classList.remove('cursor-no-drop')
-                    button.children[0].children[0].classList.add('cursor-pointer')
-                }
-            })
-
-            let packs = []
-            if (localStorage.getItem('packs')) {
-                try {
-                    packs = JSON.parse(localStorage.getItem('packs')) || []
-                } catch (e) {
-                    packs = []
-                }
+            if (!response || !response.id) {
+                restoreButton();
+                return;
             }
 
-            let existing = packs.find(pck => String(pck.id) === String(response.id))
+            const packs = readCart('packs');
+
+            const existing = packs.find(item =>
+                String(item.id) === String(response.id)
+            );
+
             if (existing) {
-                existing.quantity = (existing.quantity || 1) + 1
+
+                existing.quantity = Number(existing.quantity || 0) + 1;
+
             } else {
-                response.quantity = 1
-                packs.push(response)
+
+                response.quantity = 1;
+                packs.push(response);
+
             }
-            localStorage.setItem('packs', JSON.stringify(packs))
-            localPacks = packs
+
+            const pack = packs.find(item =>
+                String(item.id) === String(response.id)
+            );
+
+            const maxCount = getItemCount(pack);
+
+            if (pack.quantity > maxCount) {
+                pack.quantity = maxCount;
+            }
+
+            saveCart('packs', packs);
+
+            updateCartState();
+
+            renderPackControls(packId);
+
         },
+
         error: function () {
-            console.log('failed to load data')
+
+            restoreButton();
+
+            console.error('Pack request failed.');
+
         }
-    })
+
+    });
+
+    function restoreButton() {
+
+        btn.dataset.loading = 'false';
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+
+    }
 }
+
+/* =========================================================
+   CHANGE PACK QUANTITY
+========================================================= */
 
 function setPackCount(btn) {
-    let container = btn.closest('.addPackToCartBtn')
-    if (!container) return
 
-    let packId = container.dataset.packId
-    if (!packId) return
+    const container = btn.closest('.addPackToCartBtn');
 
-    localPacks = JSON.parse(localStorage.getItem('packs')) || []
+    if (!container) return;
 
-    let pack = localPacks.find(p => String(p.id) === String(packId))
-    if (!pack) return
+    const packId = container.dataset.packId;
 
-    let finalPrice = pack.secondary_price ? pack.secondary_price : pack.primary_price
+    if (!packId) return;
+
+    const packs = readCart('packs');
+
+    const pack = packs.find(item =>
+        String(item.id) === String(packId)
+    );
+
+    if (!pack) return;
+
+    const currentQuantity = Number(pack.quantity) || 0;
+    const maxCount = getItemCount(pack);
+
+    let newQuantity = currentQuantity;
 
     if (btn.dataset.state === '+') {
-        btn.parentElement.children[1].value++
-        pack.quantity++
-        totalCartQuantity++
-        if (totalPriceEl) {
-            let currentPrice = parseInt(totalPriceEl.innerText) || 0
-            totalPriceEl.innerText = currentPrice + finalPrice
-        }
-    }
 
-    if (btn.dataset.state === '-') {
-        btn.parentElement.children[1].value--
-        pack.quantity--
-        totalCartQuantity--
-        if (totalPriceEl) {
-            let currentPrice = parseInt(totalPriceEl.innerText) || 0
-            totalPriceEl.innerText = currentPrice - finalPrice
-        }
-    }
+        if (currentQuantity >= maxCount) return;
 
-    if (pack.quantity == pack.count) {
-        btn.disabled = true
-        btn.classList.remove('cursor-pointer')
-        btn.classList.add('cursor-no-drop')
+        newQuantity++;
+
+    } else if (btn.dataset.state === '-') {
+
+        if (currentQuantity <= 0) return;
+
+        newQuantity--;
+
     } else {
-        btn.parentElement.children[0].disabled = false
-        btn.parentElement.children[0].classList.remove('cursor-no-drop')
-        btn.parentElement.children[0].classList.add('cursor-pointer')
+
+        return;
+
     }
 
-    document.querySelectorAll('.addPackToCartBtn').forEach(button => {
-        if (button === container) return
-        if (String(button.dataset.packId) !== String(packId)) return
+    const difference = newQuantity - currentQuantity;
 
-        let input = button.querySelector('input[type=number]')
-        if (input) {
-            input.value = btn.parentElement.children[1].value
-        }
-    })
+    /* Update price */
 
-    localStorage.setItem('packs', JSON.stringify(localPacks))
+    if (totalPriceEl) {
 
-    if (btn.parentElement.children[1].value == 0) {
-        // if (orderBasket && orderBasket.children[1]) {
-        //     orderBasket.children[1].innerText = Math.max(0, (parseInt(orderBasket.children[1].innerText) || 1) - 1)
-        // }
+        const currentPrice =
+            Number(totalPriceEl.innerText.replace(/[^\d]/g, '')) || 0;
 
-        localPacks = localPacks.filter(cart => String(cart.id) !== String(packId))
-        localStorage.setItem('packs', JSON.stringify(localPacks))
+        const finalPrice = getItemPrice(pack);
 
-        let initialHtml = `
-            <button onclick="addPackToCart(this)" class="w-full p-3 h-full bg-(--light-green-btn) flex gap-2 justify-center items-center rounded-xl cursor-pointer transition-all duration-300 hover:bg-(--green-btn) group">
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="lg:size-4 size-3 fill-(--primary-text-color) transition-all duration-300 group-hover:fill-white">
-                        <path d="M16 0H0V32H16 67.2l77.2 339.5 2.8 12.5H160 496h16V352H496 172.8l-14.5-64H496L566 64l10-32H542.5 100L95.6 12.5 92.8 0H80 16zm91.3 64H532.5l-60 192H151L107.3 64zM184 432a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm0 80a56 56 0 1 0 0-112 56 56 0 1 0 0 112zm248-56a24 24 0 1 1 48 0 24 24 0 1 1 -48 0zm80 0a56 56 0 1 0 -112 0 56 56 0 1 0 112 0z">
-                        </path>
-                    </svg>
-                </div>
-                <span class="lg:text-sm text-[10px] text-(--primary-text-color) font-bold transition-all duration-300 group-hover:text-white">افزودن به سبد خرید</span>
-            </button>
-        `
+        totalPriceEl.innerText = Math.max(
+            0,
+            currentPrice + (difference * finalPrice)
+        ).toLocaleString('en-US');
 
-        if (!popupFlag) {
-            document.querySelectorAll('.addPackToCartBtn').forEach(button => {
-                if (String(button.dataset.packId) === String(packId)) {
-                    button.innerHTML = initialHtml
-                }
-            })
-        } else {
-            let parentItem = btn.closest('.parentItem')
-            if (parentItem && parentItem.parentElement) {
-                parentItem.parentElement.remove()
-            } else if (parentItem) {
-                parentItem.remove()
-            }
-
-            document.querySelectorAll('.addPackToCartBtn').forEach(button => {
-                if (String(button.dataset.packId) === String(packId)) {
-                    button.innerHTML = initialHtml
-                }
-            })
-        }
     }
-    orderBasket.children[1].innerText = totalCartQuantity
+
+    /* Update pack */
+
+    if (newQuantity <= 0) {
+
+        const updatedPacks = packs.filter(item =>
+            String(item.id) !== String(packId)
+        );
+
+        saveCart('packs', updatedPacks);
+
+        if (window.currentPage === 'cart') {
+
+            document.querySelectorAll('.cartPages').forEach(item => {
+
+                if (String(item.dataset.packId) === String(packId)) {
+                    item.remove();
+                }
+
+            });
+
+        }
+
+        if (popupFlag) {
+
+            const parentItem = btn.closest('.parentItem');
+
+            if (parentItem) parentItem.remove();
+
+        }
+
+    } else {
+
+        pack.quantity = newQuantity;
+
+        saveCart('packs', packs);
+
+    }
+
+    updateCartState();
+
+    renderPackControls(packId);
+
+    /* Close popup when cart is empty */
+    if (totalCartQuantity <= 0) {
+        closeCartPopup();
+    }
+
 }
 
-if (orderBasket) {
-    orderBasket.addEventListener('click', () => {
-        let hasProducts = (() => {
-            try {
-                let p = JSON.parse(localStorage.getItem('products'))
-                return p && p.length > 0
-            } catch (e) { return false }
-        })()
+/* =========================================================
+   CART POPUP
+========================================================= */
 
-        let hasPacks = (() => {
-            try {
-                let p = JSON.parse(localStorage.getItem('packs'))
-                return p && p.length > 0
-            } catch (e) { return false }
-        })()
+function renderPopupCart() {
 
-        let popup = orderBasket.parentElement.children[1]
-        let parentCart = orderBasket.parentElement.querySelector('.parentHeaderCarts')
+    const popup = orderBasket?.parentElement?.children[1];
 
-        if (hasProducts || hasPacks) {
-            if (popup.classList.contains('invisible')) {
-                popupFlag = true
-                popup.classList.remove('invisible')
-                popup.classList.remove('opacity-0')
+    const parentCart = orderBasket?.parentElement
+        ?.querySelector('.parentHeaderCarts');
 
-                if (parentCart) parentCart.innerHTML = ''
+    if (!popup || !parentCart) return;
 
-                localProducts = JSON.parse(localStorage.getItem('products')) || []
-                if (localProducts.length) {
-                    localProducts.forEach((prod) => {
-                        let element = document.createElement('div');
+    const products = readCart('products');
+    const packs = readCart('packs');
 
-                        element.className = 'parentItem flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 hover:border-blue-100 hover:shadow-md transition-all duration-300';
+    parentCart.innerHTML = '';
 
-                        element.innerHTML = `
-            <div class="w-[68px] h-[76px] sm:w-20 sm:h-20 shrink-0 overflow-hidden rounded-xl bg-gray-50 border border-gray-100">
-                <img src="${imgPath + prod.mainImg}" class="w-full h-full object-cover" alt="">
-            </div>
+    if (!products.length && !packs.length) {
 
-            <div class="flex-1 min-w-0">
-                <h3 class="font-bold text-sm text-[#010348] truncate">${prod.title}</h3>
+        parentCart.innerHTML = `
+            <div class="w-full flex flex-col items-center justify-center gap-3
+                        p-7 bg-[#101412] border border-[#2A302C] rounded-2xl">
 
-                <p class="text-[11px] text-gray-400 mt-1 mb-3 line-clamp-2 leading-5">
-                    ${prod.summary || ''}
-                </p>
+                <div class="w-14 h-14 rounded-2xl bg-[#191D1B]
+                            border border-[#2A302C] flex items-center justify-center">
 
-                <div class="addToCartBtns flex items-center justify-between w-[110px] h-9 p-1 rounded-lg bg-gray-50 border border-gray-100"
-                    data-product-id="${prod.id}">
+                    <svg class="w-7 h-7 text-[#929B95]"
+                         xmlns="http://www.w3.org/2000/svg"
+                         fill="none" viewBox="0 0 24 24">
 
-                    <button onclick="setCount(this)"
-                        class="w-7 h-7 rounded-md bg-white shadow-sm font-bold flex items-center justify-center hover:bg-[#010348] cursor-pointer !text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
-                        data-state="+"
-                        ${prod.count == prod.quantity ? 'disabled' : ''}>+</button>
+                        <path stroke="currentColor" stroke-linecap="round"
+                              stroke-linejoin="round" stroke-width="1.5"
+                              d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                    </svg>
 
-                    <input type="number" class="w-8 text-center text-xs font-bold text-[#010348] bg-transparent outline-none in-fa"
-                        readonly value="${prod.quantity}">
-
-                    <button onclick="setCount(this)"
-                        class="w-7 h-7 rounded-md bg-white shadow-sm font-bold flex items-center justify-center hover:bg-[#010348] cursor-pointer !text-white transition"
-                        data-state="-">−</button>
                 </div>
-            </div>
 
-            <div class="shrink-0 text-left">
-                <p class="font-extrabold text-sm text-[#010348] in-fa">
-                    ${prod.secondary_price || prod.primary_price
-                                ? Number(prod.secondary_price || prod.primary_price).toLocaleString('en-US')
-                                : 'تماس بگیرید'}
+                <h2 class="text-center text-sm font-bold text-[#F4F7F5]">
+                    سبد خرید خالی است
+                </h2>
+
+                <p class="text-xs text-[#929B95]">
+                    هنوز محصولی به سبد خریدت اضافه نکردی
                 </p>
-                <span class="text-[10px] text-gray-400">تومان</span>
+
             </div>
         `;
 
-                        if (parentCart) parentCart.append(element);
-                    });
-                }
+        return;
+    }
 
-                localPacks = JSON.parse(localStorage.getItem('packs')) || [];
+    products.forEach(product => {
 
-                if (localPacks.length) {
-                    localPacks.forEach((pack) => {
-                        let element = document.createElement('div');
+        const element = document.createElement('div');
 
-                        element.className = 'parentItem flex items-center gap-3 p-3 bg-white rounded-2xl border border-gray-100 hover:border-blue-100 hover:shadow-md transition-all duration-300';
+        element.className = `
+            parentItem flex items-center gap-3 p-3
+            bg-[#191D1B] rounded-2xl border border-[#2A302C]
+        `;
 
-                        element.innerHTML = `
-                            <div class="w-[68px] h-[76px] sm:w-20 sm:h-20 shrink-0 overflow-hidden rounded-xl bg-gray-50 border border-gray-100">
-                                <img src="${imgPath + pack.image}" class="w-full h-full object-cover" alt="">
-                            </div>
+        const price = getItemPrice(product);
 
-                            <div class="flex-1 min-w-0">
-                                <h3 class="font-bold text-sm text-[#010348] truncate">${pack.title}</h3>
+        element.innerHTML = `
+            <div class="w-[68px] h-[76px] sm:w-20 sm:h-20
+                        shrink-0 overflow-hidden rounded-xl bg-white">
 
-                                <p class="text-[11px] text-gray-400 mt-1 mb-3 line-clamp-2 leading-5">
-                                    ${pack.summary || ''}
-                                </p>
+                <img src="${imgPath + product.mainImg}"
+                     class="w-full h-full object-cover" alt="">
 
-                                <div class="addPackToCartBtn flex items-center justify-between w-[110px] h-9 p-1 rounded-lg bg-gray-50 border border-gray-100"
-                                    data-pack-id="${pack.id}">
+            </div>
 
-                                    <button onclick="setPackCount(this)"
-                                        class="w-7 h-7 rounded-md bg-white shadow-sm font-bold flex items-center justify-center hover:bg-[#010348] !text-white transition disabled:opacity-40 disabled:cursor-not-allowed"
-                                        data-state="+"
-                                        ${pack.count == pack.quantity ? 'disabled' : ''}>+</button>
+            <div class="flex-1 min-w-0">
 
-                                    <input type="number" class="w-8 text-center text-xs font-bold text-[#010348] bg-transparent outline-none in-fa"
-                                        readonly value="${pack.quantity}">
+                <h3 class="font-bold text-sm text-[#F4F7F5] truncate">
+                    ${product.title || ''}
+                </h3>
 
-                                    <button onclick="setPackCount(this)"
-                                        class="w-7 h-7 rounded-md bg-white shadow-sm font-bold flex items-center justify-center hover:bg-[#010348] !text-white transition"
-                                        data-state="-">−</button>
-                                </div>
-                            </div>
-                            <div class="shrink-0 text-left">
-                            `
-                        if (pack.secondary_price || pack.primary_price){
-                            element.innerHTML+=`
-                            <p class="font-extrabold text-sm text-[#010348] in-fa">
-                                ${pack.secondary_price || pack.primary_price
-                                            ? Number(pack.secondary_price || pack.primary_price).toLocaleString('en-US')
-                                            : 'تماس بگیرید'}
-                            </p>
-                            <span class="text-[10px] text-gray-400">تومان</span>`
-    
-                            
-                        } else {
+                <p class="text-[11px] text-[#929B95] mt-1 mb-3 line-clamp-2">
+                    ${product.summary || ''}
+                </p>
 
-                            element.innerHTML +=`
-                            <p class="font-extrabold text-sm text-[#010348] in-fa">تماس بگیرید</p>
-                            </div>`
-                        }
-                        
+                <div class="addToCartBtns w-[110px] h-9" style="padding: 0 !important;"
+                     data-product-id="${product.id}"
+                     data-count="${product.count}">
 
-                        if (parentCart) parentCart.append(element);
-                    });
-                }
+                    ${getQuantityControl(product, 'product')}
 
-                localPacks = JSON.parse(localStorage.getItem('packs')) || []
-                if (localPacks.length) {
-                    localPacks.forEach((pack) => {
-                        let element = document.createElement('div')
-                        element.classList = 'bg-white rounded-2xl p-4 flex gap-4 items-center shadow-sm border border-gray-100 parentItem'
-                        element.innerHTML = `
-                            <div class="w-16 h-20 sm:w-20 sm:h-24 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                                <img src="${imgPath + pack.image}" class="size-full object-cover" alt="">
-                            </div>
-                            <div class="flex-1 min-w-0 products">
-                                <h3 class="font-semibold text-gray-800 text-sm sm:text-base truncate">${pack.title}</h3>
-                                <p class="text-xs text-gray-500 mt-0.5 mb-5 max-w-full h-8 max-h-8 overflow-hidden ellipsis-2">${pack.summary}</p>
-                                <div class="w-full p-2 bg-(--light-green-btn) hover:bg-(--green-btn) transition-all duration-300 group flex gap-2 justify-center items-center rounded-xl addPackToCartBtn" data-pack-id="${pack.id}">
-                                    <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center ${pack.count == pack.quantity ? 'cursor-no-drop' : 'cursor-pointer'}" ${pack.count == pack.quantity ? 'disabled' : ''} data-state="+">+</button>
-                                    <input type="number" class="w-1/3 text-sm text-center outline-none text-(--primary-text-color) transition-all duration-300 group-hover:text-white in-fa" readonly value="${pack.quantity}">
-                                    <button onclick="setPackCount(this)" class="w-1/3 text-lg font-bold text-(--primary-text-color) transition-all duration-300 group-hover:text-white flex justify-center items-center cursor-pointer" data-state="-">-</button>
-                                </div>
-                            </div>
-                            <div class="text-left shrink-0">
-                                <p class="font-bold text-gray-800 text-sm sm:text-base in-fa price">${pack.secondary_price ? pack.secondary_price : pack.primary_price}</p>
-                                <p class="text-xs text-gray-400">تومان</p>
-                            </div>
-                        `
-                        if (parentCart) parentCart.append(element)
-                    })
-                }
-            } else {
-                popup.classList.add('invisible')
-                popup.classList.add('opacity-0')
-                popupFlag = false
-            }
-        } else {
-            popup.classList.remove('invisible')
-            popup.classList.remove('opacity-0')
-            if (parentCart) {
-                parentCart.innerHTML = `
-                    <div class="w-full flex flex-col items-center justify-center gap-2 p-5 border border-gray-300 rounded-md cursor-pointer">
-                        <h2 class="text-center lg:text-lg font-bold text-gray-400">سبد خرید خالی است</h2>
-                        <svg class="w-[29px] h-[29px] text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
-                        </svg>
-                    </div>
-                `
-                cartLink.classList.add('hidden')
+                </div>
 
-            }
-            popupFlag = true
-        }
-    })
+            </div>
 
-    document.addEventListener('click', (e) => {
-        let popup = orderBasket.parentElement.children[1]
-        if (!orderBasket.contains(e.target) && !popup.contains(e.target)) {
-            popupFlag = false
-            popup.classList.add('invisible')
-            popup.classList.add('opacity-0')
-        }
-    })
+            <div class="shrink-0 text-left">
+
+                <p class="font-extrabold text-sm text-[#F4F7F5] in-fa">
+                    ${price ? price.toLocaleString('en-US') : 'تماس بگیرید'}
+                </p>
+
+                <span class="text-[10px] text-[#929B95]">تومان</span>
+
+            </div>
+        `;
+
+        parentCart.append(element);
+
+    });
+
+    packs.forEach(pack => {
+
+        const element = document.createElement('div');
+
+        element.className = `
+            parentItem flex items-center gap-3 p-3
+            bg-[#191D1B] rounded-2xl border border-[#2A302C]
+        `;
+
+        const price = getItemPrice(pack);
+
+        element.innerHTML = `
+            <div class="w-[68px] h-[76px] sm:w-20 sm:h-20
+                        shrink-0 overflow-hidden rounded-xl bg-white">
+
+                <img src="${imgPath + pack.image}"
+                     class="w-full h-full object-cover" alt="">
+
+            </div>
+
+            <div class="flex-1 min-w-0">
+
+                <h3 class="font-bold text-sm text-[#F4F7F5] truncate">
+                    ${pack.title || ''}
+                </h3>
+
+                <p class="text-[11px] text-[#929B95] mt-1 mb-3 line-clamp-2">
+                    ${pack.summary || ''}
+                </p>
+
+                <div class="addPackToCartBtn w-[110px] h-9"
+                     data-pack-id="${pack.id}"
+                     data-count="${pack.count}">
+
+                    ${getQuantityControl(pack, 'pack')}
+
+                </div>
+
+            </div>
+
+            <div class="shrink-0 text-left">
+
+                <p class="font-extrabold text-sm text-[#F4F7F5] in-fa">
+                    ${price ? price.toLocaleString('en-US') : 'تماس بگیرید'}
+                </p>
+
+                <span class="text-[10px] text-[#929B95]">تومان</span>
+
+            </div>
+        `;
+
+        parentCart.append(element);
+
+    });
+
 }
+
+/* =========================================================
+   CART POPUP EVENTS
+========================================================= */
+
+if (orderBasket) {
+
+    const popup = orderBasket.parentElement?.children[1];
+
+    // باز و بسته شدن با کلیک روی آیکون سبد خرید
+    orderBasket.addEventListener('click', function (event) {
+
+        event.stopPropagation();
+
+        if (!popup) return;
+
+        if (popup.classList.contains('invisible')) {
+
+            popupFlag = true;
+
+            popup.classList.remove('invisible', 'opacity-0');
+
+            renderPopupCart();
+
+        } else {
+
+            popupFlag = false;
+
+            popup.classList.add('invisible', 'opacity-0');
+
+        }
+
+    });
+
+    // جلوگیری از بسته شدن هنگام کلیک داخل پاپ‌آپ
+    if (popup) {
+
+        popup.addEventListener('click', function (event) {
+            event.stopPropagation();
+        });
+
+    }
+
+    // بستن پاپ‌آپ با کلیک خارج از آن
+    document.addEventListener('click', function (event) {
+        closeCartPopup(event);
+    });
+
+}
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateCartState();

@@ -261,7 +261,7 @@ body {
 
         {{-- Top Banner --}}
         <a href="{{ $setting['topBannerLink'] }}"
-           class="w-full justify-center items-center hidden lg:flex hidden"
+           class="w-full justify-center items-center lg:flex hidden"
            id="topBanner">
 
             <img

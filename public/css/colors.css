@@ -1,71 +1,88 @@
 
 /* =========================================================
    DIAR ABZAR — CART DESIGN SYSTEM
-   Navy: #07145c
-   Red:  #e50914
-   Blue: #0877d1
+   Background: #090C0A
+   Surface:    #191D1B
+   Neon Green: #00F477
+   Hover:      #39FF98
+   Text:       #F4F7F5
+   Muted:      #929B95
+   Border:     #2A302C
    ========================================================= */
 
 :root {
-    --primary-text-color: #07145c;
-    --secondary-text-color: #64748b;
-    --secondary-text: #64748b;
+    --primary-text-color: #F4F7F5;
+    --secondary-text-color: #929B95;
+    --secondary-text: #929B95;
 
-    --green-btn: #07145c;
-    --light-green-btn: #e8edff;
-    --bg-dark-green: #07145c;
+    --green-btn: #00F477;
+    --light-green-btn: #202522;
+    --bg-dark-green: #090C0A;
 
-    --cream-color: #f3f5fa;
-    --second-cream-color: #edf1f8;
+    --cream-color: #101412;
+    --second-cream-color: #191D1B;
 
-    --purple-btn: #0877d1;
-    --pastel-pink: #e50914;
-    --discount-color: #e50914;
+    --purple-btn: #39FF98;
+    --pastel-pink: #00F477;
+    --discount-color: #00F477;
 
-    --diar-navy: #07145c;
-    --diar-red: #e50914;
-    --diar-blue: #0877d1;
-    --diar-light: #f3f5fa;
+    --diar-navy: #090C0A;
+    --diar-red: #00F477;
+    --diar-blue: #39FF98;
+    --diar-light: #191D1B;
+
+    --cf-bg: #090C0A;
+    --cf-surface: #191D1B;
+    --cf-surface-dark: #101412;
+    --cf-surface-hover: #202522;
+    --cf-green: #00F477;
+    --cf-green-hover: #39FF98;
+    --cf-text: #F4F7F5;
+    --cf-muted: #929B95;
+    --cf-border: #2A302C;
+    --cf-dark-text: #06140B;
 }
 
-/* =========================
+/* =========================================================
    CART ITEM
-========================= */
+========================================================= */
 
 .parentItem {
-    background: #ffffff !important;
-    border: 1px solid #e5eaf2 !important;
+    background: var(--cf-surface) !important;
+    border: 1px solid var(--cf-border) !important;
     border-radius: 16px !important;
-    box-shadow: 0 4px 14px rgba(7, 20, 92, .05) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .2) !important;
     transition: all .25s ease;
 }
 
 .parentItem:hover {
-    border-color: #cbd5e1 !important;
-    box-shadow: 0 8px 22px rgba(7, 20, 92, .09) !important;
+    border-color: rgba(0, 244, 119, .35) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .3) !important;
 }
 
 .parentItem h3 {
-    color: #07145c !important;
+    color: var(--cf-text) !important;
 }
 
 .parentItem p {
-    color: #64748b;
+    color: var(--cf-muted);
 }
 
 .parentItem .price {
-    color: #07145c !important;
+    color: var(--cf-green) !important;
     font-weight: 800;
 }
 
-/* =========================
+/* =========================================================
    QUANTITY CONTROLS
-========================= */
+========================================================= */
+
+/* ظرف کنترل تعداد در سبد خرید */
 
 .parentItem .addToCartBtns,
 .parentItem .addPackToCartBtn {
-    background: #e8edff !important;
-    border: 1px solid #dbe4ff !important;
+    background: var(--cf-surface-dark) !important;
+    border: 1px solid var(--cf-border) !important;
     border-radius: 12px !important;
     padding: 6px !important;
     transition: all .2s ease;
@@ -73,129 +90,265 @@
 
 .parentItem .addToCartBtns:hover,
 .parentItem .addPackToCartBtn:hover {
-    background: #edf1f8 !important;
+    background: var(--cf-surface-hover) !important;
+    border-color: rgba(0, 244, 119, .25) !important;
 }
+
+/* دکمه‌های افزایش و کاهش تعداد */
 
 .parentItem .addToCartBtns button,
 .parentItem .addPackToCartBtn button {
-    color: #07145c !important;
+    background: transparent !important;
+    color: var(--cf-green) !important;
+    border: none !important;
+    box-shadow: none !important;
     font-weight: 800;
-    border-radius: 8px;
+    border-radius: 8px !important;
     transition: all .2s ease;
 }
 
 .parentItem .addToCartBtns button:hover:not(:disabled),
 .parentItem .addPackToCartBtn button:hover:not(:disabled) {
-    background: #07145c !important;
-    color: #ffffff !important;
+    background: var(--cf-green) !important;
+    color: var(--cf-dark-text) !important;
 }
+
+/* دکمه غیرفعال کنترل تعداد */
 
 .parentItem .addToCartBtns button:disabled,
 .parentItem .addPackToCartBtn button:disabled {
-    color: #94a3b8 !important;
-    opacity: .5;
+    color: #64716A !important;
+    opacity: .45;
     cursor: not-allowed !important;
 }
+
+/* فیلد نمایش تعداد */
 
 .parentItem .addToCartBtns input,
 .parentItem .addPackToCartBtn input {
     background: transparent !important;
-    color: #07145c !important;
+    color: var(--cf-text) !important;
     font-weight: 800;
 }
 
-/* =========================
+/* =========================================================
    ADD TO CART BUTTONS
-========================= */
+========================================================= */
+
+/* دکمه اصلی افزودن به سبد خرید */
 
 .addToCartBtns > button,
 .addPackToCartBtn > button {
-    background: #07145c !important;
-    color: #ffffff !important;
-    border: 1px solid #07145c !important;
+    background: var(--cf-green) !important;
+    color: var(--cf-dark-text) !important;
+    border: 1px solid var(--cf-green) !important;
     border-radius: 12px !important;
-    transition: all .25s ease;
-    box-shadow: 0 4px 12px rgba(7, 20, 92, .12);
+    transition: all .3s ease !important;
+    box-shadow: 0 4px 12px rgba(0, 244, 119, .12) !important;
 }
 
-.addToCartBtns > button:hover,
-.addPackToCartBtn > button:hover {
-    background: #0877d1 !important;
-    border-color: #0877d1 !important;
-    color: #ffffff !important;
+/* حالت هاور */
+
+.addToCartBtns > button:hover:not(:disabled),
+.addPackToCartBtn > button:hover:not(:disabled) {
+    background: var(--cf-green-hover) !important;
+    border-color: var(--cf-green-hover) !important;
+    color: var(--cf-dark-text) !important;
     transform: translateY(-2px);
-    box-shadow: 0 7px 16px rgba(8, 119, 209, .2);
+    box-shadow: 0 7px 16px rgba(0, 244, 119, .2) !important;
 }
+
+/* آیکون دکمه افزودن */
 
 .addToCartBtns > button svg,
 .addPackToCartBtn > button svg {
-    fill: #ffffff !important;
+    fill: var(--cf-dark-text) !important;
+    color: var(--cf-dark-text) !important;
 }
+
+/* متن دکمه افزودن */
 
 .addToCartBtns > button span,
 .addPackToCartBtn > button span {
-    color: #ffffff !important;
+    color: var(--cf-dark-text) !important;
 }
 
-/* =========================
+/* دکمه غیرفعال */
+
+.addToCartBtns > button:disabled,
+.addPackToCartBtn > button:disabled {
+    opacity: .5;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* =========================================================
+   PRODUCT PRIMARY BUTTON
+   JavaScript Generated Button
+========================================================= */
+
+.product-primary-btn {
+    background: #00F477 !important;
+    color: #06140B !important;
+    border: 1px solid #00F477 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 244, 119, .12) !important;
+    transition: all .3s ease !important;
+}
+
+/* Hover */
+
+.product-primary-btn:hover:not(:disabled) {
+    background: #39FF98 !important;
+    color: #06140B !important;
+    border-color: #39FF98 !important;
+    box-shadow: 0 7px 18px rgba(0, 244, 119, .25) !important;
+    transform: translateY(-2px);
+}
+
+/* Active */
+
+.product-primary-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 244, 119, .18) !important;
+}
+
+/* Icon */
+
+.product-primary-btn svg {
+    color: #06140B !important;
+    stroke: #06140B !important;
+    fill: none !important;
+}
+
+/* Text */
+
+.product-primary-btn span {
+    color: #06140B !important;
+}
+
+/* Disabled */
+
+.product-primary-btn:disabled {
+    opacity: .5;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* =========================================================
    CART POPUP
-========================= */
+========================================================= */
 
 .parentHeaderCarts {
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
+    scrollbar-color: #3A4940 transparent;
 }
 
 .parentHeaderCarts::-webkit-scrollbar {
     width: 5px;
 }
 
+.parentHeaderCarts::-webkit-scrollbar-track {
+    background: transparent;
+}
+
 .parentHeaderCarts::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #3A4940;
     border-radius: 10px;
 }
 
-/* =========================
+.parentHeaderCarts::-webkit-scrollbar-thumb:hover {
+    background: var(--cf-green);
+}
+
+/* =========================================================
    EMPTY CART
-========================= */
+========================================================= */
 
 .parentHeaderCarts > div:has(h2) {
-    background: #f8faff !important;
-    border: 1px dashed #cbd5e1 !important;
+    background: var(--cf-surface-dark) !important;
+    border: 1px dashed var(--cf-border) !important;
     border-radius: 16px !important;
 }
 
 .parentHeaderCarts > div:has(h2) h2 {
-    color: #64748b !important;
+    color: var(--cf-text) !important;
 }
 
-/* =========================
+.parentHeaderCarts > div:has(h2) p {
+    color: var(--cf-muted) !important;
+}
+
+/* =========================================================
    LOADING SPINNER
-========================= */
+========================================================= */
 
 .addToCartBtns .animate-spin,
 .addPackToCartBtn .animate-spin {
-    border-color: rgba(255, 255, 255, .35) !important;
-    border-top-color: #ffffff !important;
+    border-color: rgba(6, 20, 11, .2) !important;
+    border-top-color: #06140B !important;
 }
 
-/* =========================
+/* =========================================================
    CART LINK
-========================= */
+========================================================= */
 
 #cartLink {
+    color: var(--cf-text);
     transition: all .2s ease;
 }
 
 #cartLink:hover {
-    color: #0877d1;
+    color: var(--cf-green);
 }
 
-/* =========================
+/* =========================================================
+   PRODUCT PAGE ADD TO CART
+========================================================= */
+
+.product-page .addToCartBtns > button,
+.product-mobile-buy .addToCartBtns > button {
+    background: var(--cf-green) !important;
+    color: var(--cf-dark-text) !important;
+    border: 1px solid var(--cf-green) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 12px rgba(0, 244, 119, .12) !important;
+    transform: translateY(0);
+    transition: all .3s ease !important;
+}
+
+.product-page .addToCartBtns > button:hover:not(:disabled),
+.product-mobile-buy .addToCartBtns > button:hover:not(:disabled) {
+    background: var(--cf-green-hover) !important;
+    color: var(--cf-dark-text) !important;
+    border-color: var(--cf-green-hover) !important;
+    box-shadow: 0 7px 18px rgba(0, 244, 119, .25) !important;
+    transform: translateY(-2px);
+}
+
+.product-page .addToCartBtns > button:active,
+.product-mobile-buy .addToCartBtns > button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 244, 119, .18) !important;
+}
+
+.product-page .addToCartBtns > button svg,
+.product-mobile-buy .addToCartBtns > button svg {
+    fill: var(--cf-dark-text) !important;
+    color: var(--cf-dark-text) !important;
+}
+
+.product-page .addToCartBtns > button span,
+.product-mobile-buy .addToCartBtns > button span {
+    color: var(--cf-dark-text) !important;
+}
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
 @media (max-width: 640px) {
+
     .parentItem {
         padding: 10px !important;
         gap: 10px !important;
@@ -206,4 +359,23 @@
     .parentItem .addPackToCartBtn {
         padding: 5px !important;
     }
+
+}
+
+/* =========================================================
+   ACCESSIBILITY — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .parentItem,
+    .parentItem *,
+    .addToCartBtns *,
+    .addPackToCartBtn *,
+    .product-primary-btn,
+    #cartLink {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+
 }

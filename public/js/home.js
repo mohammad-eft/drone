@@ -1,90 +1,226 @@
 
-let addToCartBtns = document.querySelectorAll('.addToCartBtns')
+/* =========================================================
+   DIAR ABZAR — HOME CART
+========================================================= */
 
-localProducts = JSON.parse(localStorage.getItem('products'))
-localPacks = JSON.parse(localStorage.getItem('packs'))
-orderBasket = document.getElementById('orderBasket')
+let addToCartBtns = document.querySelectorAll('.addToCartBtns');
 
-let totalCartQuantity = 0
+localProducts = [];
+localPacks = [];
 
-addToCartBtns.forEach(product => {
+orderBasket = document.getElementById('orderBasket');
 
-    if (localProducts) {
-        localProducts.find(cartPro => {
+let totalCartQuantity = 0;
 
-            if (cartPro.id == (product.closest('.products') && product.closest('.products').dataset.productId)) {
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
 
-                product.innerHTML = `
-                <div class="w-full p-2 h-full transition-all duration-300 bg-[#e8edff] flex gap-2 justify-center items-center rounded-xl">
-
-                    <button onclick="setCount(this)"
-                        class="w-1/3 h-9 rounded-lg transition-all duration-200 bg-white text-[#07145c] hover:bg-[#0877d1] hover:text-white flex justify-center items-center text-lg font-bold ${cartPro.count == cartPro.quantity ? 'cursor-no-drop opacity-40' : 'cursor-pointer'}"
-                        ${cartPro.count == cartPro.quantity ? 'disabled' : ''}
-                        data-state="+">+</button>
-
-                    <input type="number"
-                        class="w-1/3 h-9 rounded-lg bg-transparent text-[#07145c] text-sm text-center outline-none in-fa font-bold"
-                        readonly value="${cartPro.quantity}">
-
-                    <button onclick="setCount(this)"
-                        class="w-1/3 h-9 rounded-lg transition-all duration-200 bg-white text-[#07145c] hover:bg-[#0877d1] hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer"
-                        data-state="-">-</button>
-
-                </div>`
-
-                if (cartPro.count == 0) {
-                    product.innerHTML = `
-                    <button class="w-full px-4 h-full bg-[#e50914] flex gap-2 justify-center items-center rounded-xl relative after:absolute after:w-full after:h-full after:content-[''] after:top-0 after:right-0 after:bg-white/30 after:rounded-xl transition-all duration-300 hover:bg-[#c90812] cursor-no-drop group">
-                        <span class="lg:text-sm text-[10px] text-white font-bold transition-all duration-300">عدم موجودی</span>
-                    </button>`
-                }
-            }
-        })
+function getCartStorage(key) {
+    try {
+        const data = JSON.parse(localStorage.getItem(key));
+        return Array.isArray(data) ? data : [];
+    } catch (error) {
+        return [];
     }
+}
 
-    if (localPacks) {
-        localPacks.forEach(cartPro => {
+function refreshCartStorage() {
+    localProducts = getCartStorage('products');
+    localPacks = getCartStorage('packs');
 
-            if (cartPro.id == (product.closest('.products') && product.closest('.products').dataset.productId)) {
+    totalCartQuantity = 0;
 
-                product.innerHTML = `
-                <div class="w-full p-2 h-full transition-all duration-300 bg-[#e8edff] flex gap-2 justify-center items-center rounded-xl">
-
-                    <button onclick="setPackCount(this)"
-                        class="w-1/3 h-9 rounded-lg transition-all duration-200 bg-white text-[#07145c] hover:bg-[#0877d1] hover:text-white flex justify-center items-center text-lg font-bold ${cartPro.count == cartPro.quantity ? 'cursor-no-drop opacity-40' : 'cursor-pointer'}"
-                        ${cartPro.count == cartPro.quantity ? 'disabled' : ''}
-                        data-state="+">+</button>
-
-                    <input type="number"
-                        class="w-1/3 h-9 rounded-lg bg-transparent text-[#07145c] text-sm text-center outline-none in-fa font-bold"
-                        readonly value="${cartPro.quantity}">
-
-                    <button onclick="setPackCount(this)"
-                        class="w-1/3 h-9 rounded-lg transition-all duration-200 bg-white text-[#07145c] hover:bg-[#0877d1] hover:text-white flex justify-center items-center text-lg font-bold cursor-pointer"
-                        data-state="-">-</button>
-
-                </div>`
-            }
-        })
-    }
-})
-
-if (localProducts) {
     localProducts.forEach(item => {
-        totalCartQuantity += item.quantity
-    })
+        totalCartQuantity += Number(item.quantity) || 0;
+    });
 
-    cartLink.classList.remove('hidden')
-}
-
-if (localPacks) {
     localPacks.forEach(item => {
-        totalCartQuantity += item.quantity
-    })
+        totalCartQuantity += Number(item.quantity) || 0;
+    });
 
-    cartLink.classList.remove('hidden')
+    updateCartBadge();
 }
 
-if (orderBasket && orderBasket.children[1]) {
-    orderBasket.children[1].innerText = totalCartQuantity
+/* =========================================================
+   CART COLORS
+========================================================= */
+
+const cfColors = {
+    bg: '#090C0A',
+    surface: '#191D1B',
+    surfaceDark: '#101412',
+    surfaceHover: '#202522',
+    green: '#00F477',
+    greenHover: '#39FF98',
+    text: '#F4F7F5',
+    muted: '#929B95',
+    border: '#2A302C',
+    darkText: '#06140B'
+};
+
+/* =========================================================
+   QUANTITY CONTROL
+========================================================= */
+
+function getCartQuantityHTML(cart, type) {
+
+    const isPack = type === 'pack';
+
+    const setFunction = isPack ? 'setPackCount' : 'setCount';
+
+    const quantity = Number(cart.quantity) || 1;
+    const maxCount = Number(cart.count) || 0;
+
+    const isMaxQuantity = quantity >= maxCount;
+
+    return `
+        <div class="w-full p-1.5 h-full flex gap-2 justify-center items-center
+                    rounded-xl bg-[#101412] border border-[#2A302C]
+                    transition-all duration-300">
+
+            <button
+                type="button"
+                onclick="${setFunction}(this)"
+                class="w-1/3 h-9 rounded-lg flex justify-center items-center
+                       text-[#00F477] hover:bg-[#00F477] hover:text-[#06140B]
+                       transition-all duration-200 text-lg font-bold
+                       ${isMaxQuantity ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}"
+                ${isMaxQuantity ? 'disabled' : ''}
+                data-state="+">
+                +
+            </button>
+
+            <input
+                type="number"
+                class="w-1/3 h-9 rounded-lg bg-transparent text-[#F4F7F5]
+                       text-sm text-center outline-none in-fa font-bold"
+                readonly
+                value="${quantity}">
+
+            <button
+                type="button"
+                onclick="${setFunction}(this)"
+                class="w-1/3 h-9 rounded-lg flex justify-center items-center
+                       text-[#00F477] hover:bg-[#00F477] hover:text-[#06140B]
+                       transition-all duration-200 text-lg font-bold cursor-pointer"
+                data-state="-">
+                -
+            </button>
+
+        </div>
+    `;
 }
+
+/* =========================================================
+   ADD BUTTON
+========================================================= */
+
+function getAddButtonHTML(type, count) {
+
+    const isPack = type === 'pack';
+
+    const functionName = isPack ? 'addPackToCart' : 'addToCart';
+
+    if (Number(count) <= 0) {
+        return `
+            <button type="button" disabled
+                class="w-full h-10 px-3 flex justify-center items-center gap-2
+                       rounded-xl bg-[#202522] border border-[#2A302C]
+                       text-[#929B95] text-xs font-bold cursor-not-allowed">
+
+                <span class="w-1.5 h-1.5 rounded-full bg-[#ED4444]"></span>
+                <span>عدم موجودی</span>
+            </button>
+        `;
+    }
+
+    return `
+        <button
+            type="button"
+            onclick="${functionName}(this)"
+            class="product-primary-btn w-full h-10 px-3 rounded-xl
+                   flex justify-center items-center gap-2 font-bold text-xs
+                   transition-all duration-300">
+
+            <svg class="size-4 shrink-0" viewBox="0 0 24 24"
+                 fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
+                <circle cx="10" cy="20" r="1"/>
+                <circle cx="18" cy="20" r="1"/>
+                <path d="M14 9v5M11.5 11.5h5"/>
+            </svg>
+
+            <span>افزودن به سبد خرید</span>
+
+        </button>
+    `;
+}
+
+/* =========================================================
+   INITIALIZE PRODUCT BUTTONS
+========================================================= */
+
+function initializeCartButtons() {
+
+    document.querySelectorAll('.addToCartBtns').forEach(container => {
+
+        const productId = container.dataset.productId;
+        const packId = container.dataset.packId;
+
+        if (productId) {
+
+            const product = localProducts.find(item =>
+                String(item.id) === String(productId)
+            );
+
+            if (product) {
+                container.innerHTML = getCartQuantityHTML(product, 'product');
+            }
+        }
+
+        if (packId) {
+
+            const pack = localPacks.find(item =>
+                String(item.id) === String(packId)
+            );
+
+            if (pack) {
+                container.innerHTML = getCartQuantityHTML(pack, 'pack');
+            }
+        }
+    });
+}
+
+/* =========================================================
+   CART BADGE
+========================================================= */
+
+function updateCartBadge() {
+
+    if (!orderBasket || !orderBasket.children[1]) return;
+
+    orderBasket.children[1].innerText = totalCartQuantity;
+
+    orderBasket.children[1].classList.add(
+        'bg-[#00F477]',
+        'text-[#06140B]',
+        'font-extrabold'
+    );
+
+    const hasItems = totalCartQuantity > 0;
+
+    const cartLink = document.getElementById('cartLink');
+
+    if (cartLink) {
+        cartLink.classList.toggle('hidden', !hasItems);
+    }
+}
+
+/* =========================================================
+   INITIALIZATION
+========================================================= */
+
+refreshCartStorage();
+
+initializeCartButtons();
