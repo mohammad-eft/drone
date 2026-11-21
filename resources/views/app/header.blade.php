@@ -388,6 +388,7 @@ body {
 
                         {{-- Account --}}
                         <div class="block relative group cursor-pointer"
+                             id="account_pupup_trigger"
                              onclick="account_pupup('open')">
 
                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -657,3 +658,17 @@ body {
         </div>
 
     </header>
+
+    <script>
+        const accountPopup = document.getElementById('account_pupup_item');
+        const accountTrigger = document.getElementById('account_pupup_trigger');
+
+        document.addEventListener('click', function (e) {
+            if (
+                !accountTrigger.contains(e.target) &&
+                !accountPopup.contains(e.target)
+            ) {
+                account_pupup('close');
+            }
+        });
+    </script>

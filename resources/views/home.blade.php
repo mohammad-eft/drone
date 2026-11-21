@@ -118,7 +118,7 @@
             </section>
         @endif
 
-
+        @if(count($products)>0)
         {{-- ========================= POPULAR PRODUCTS ========================= --}}
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start diar-section">
 
@@ -231,7 +231,7 @@
 
             </div>
         </section>
-
+        @endif
 
         {{-- ========================= SECOND BANNER ========================= --}}
         <section
@@ -267,7 +267,7 @@
             </div>
         </section>
 
-
+        @if(count($newProducts)>0)
         {{-- ========================= NEW PRODUCTS ========================= --}}
         <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-start diar-section">
 
@@ -383,7 +383,7 @@
 
             </div>
         </section>
-
+        @endif
 
         {{-- ========================= SIDE BANNERS ========================= --}}
         
@@ -569,20 +569,20 @@
             }
             .diar-home *{box-sizing:border-box}
             .diar-home .diar-section{padding-top:42px;padding-bottom:42px;border-bottom:1px solid #1d2420}
-            .diar-home .diar-section h3{color:#f5f7f6!important;font-size:22px;font-weight:850}
+            .diar-home .diar-section h3{color:#f5f7f6!important;font-size:22px;font-weight:bold}
             .diar-home .diar-section-link{color:#87918a;transition:.2s}
             .diar-home .diar-section-link:hover{color:#00f477}
             /* HERO */
-            .diar-home .diar-hero{display:grid;grid-template-columns:1fr 1.08fr;align-items:center;gap:36px;min-height:470px;margin:18px auto 0;padding:42px 4%;border:1px solid #1c2b21;border-radius:17px;background:radial-gradient(ellipse at 75% 50%,rgba(0,244,119,.12),transparent 48%),linear-gradient(110deg,#090c0a,#0d1711 65%,#090c0a);isolation:isolate}
+            .diar-home .diar-hero{display:grid;grid-template-columns:1fr 1.08fr;align-items:center;gap:36px;min-height:470px;margin:20px auto 0;padding:42px 4%;border:1px solid #1c2b21;border-radius:17px;background:radial-gradient(ellipse at 75% 50%,rgba(0,244,119,.12),transparent 48%),linear-gradient(110deg,#090c0a,#0d1711 65%,#090c0a);isolation:isolate}
             .diar-home .diar-hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:19px;position:relative;z-index:2}
-            .diar-home .diar-hero-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border:1px solid rgba(0,244,119,.2);border-radius:50px;background:rgba(0,244,119,.07);color:#00f477;font-size:10px;font-weight:800;letter-spacing:1px}
+            .diar-home .diar-hero-eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 13px;border:1px solid rgba(0,244,119,.2);border-radius:50px;background:rgba(0,244,119,.07);color:#00f477;font-size:10px;font-weight:bold;letter-spacing:1px}
             .diar-home .diar-hero-eyebrow i{width:7px;height:7px;border-radius:50%;background:#00f477;box-shadow:0 0 12px #00f477}
-            .diar-home .diar-hero-copy h1{margin:0;color:#fff!important;font-size:clamp(34px,4.6vw,66px);line-height:1.35;font-weight:950}
+            .diar-home .diar-hero-copy h1{margin:0;color:#fff!important;font-size:clamp(34px,4.6vw,66px);line-height:1.35;font-weight:bold}
             .diar-home .diar-hero-copy p{max-width:540px;margin:0;color:#aab5ae!important;font-size:14px;line-height:2.1}
             .diar-home .diar-hero-points{display:flex;flex-wrap:wrap;gap:8px}
             .diar-home .diar-hero-points span{padding:8px 11px;border:1px solid #29332d;border-radius:7px;background:#171d19;color:#cbd5ce;font-size:10px}
             .diar-home .diar-hero-actions{display:flex;flex-wrap:wrap;gap:11px;width:100%;margin-top:4px}
-            .diar-home .diar-hero-primary,.diar-home .diar-hero-secondary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:145px;min-height:46px;padding:11px 22px;border-radius:8px;color:#fff!important;font-size:12px;font-weight:800;transition:.25s}
+            .diar-home .diar-hero-primary,.diar-home .diar-hero-secondary{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:145px;min-height:46px;padding:11px 22px;border-radius:8px;color:#fff!important;font-size:12px;font-weight:bold;transition:.25s}
             .diar-home .diar-hero-primary{background:#00f477!important;color:#06140b!important;box-shadow:0 0 22px rgba(0,244,119,.17)}
             .diar-home .diar-hero-primary:hover{background:#39ff98!important;transform:translateY(-3px)}
             .diar-home .diar-hero-secondary{background:transparent!important;border:1px solid #3a443e}
@@ -599,7 +599,7 @@
             .diar-home .diar-pack-card:hover{transform:translateY(-4px);border-color:#00f477}
             .diar-home .diar-pack-shape{background:#191e1b}
             .diar-home .diar-pack-title{color:#f4f7f5}.diar-home .diar-pack-summary{color:#a0aaa3}
-            .diar-home .diar-pack-button{background:#00f477;color:#06140b;transition:.2s;font-weight:800}
+            .diar-home .diar-pack-button{background:#00f477;color:#06140b;transition:.2s;font-weight:bold}
             .diar-home .diar-pack-button:hover{background:#39ff98;transform:translateY(-2px)}
             /* PRODUCTS */
             .diar-home .diar-product-card{min-width:0;min-height:100%;padding:11px!important;background:#191d1b;border:1px solid #2a302c;box-shadow:none;transition:.25s}
@@ -607,11 +607,11 @@
             .diar-home .diar-product-image{min-height:155px;padding:12px!important;border-radius:9px;background:#101412;overflow:hidden}
             .diar-home .diar-product-image img{transition:transform .3s}
             .diar-home .diar-product-card:hover .diar-product-image img{transform:scale(1.05)}
-            .diar-home .diar-product-title{color:#f3f6f4!important;font-size:13px!important;font-weight:800;line-height:1.8;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+            .diar-home .diar-product-title{color:#f3f6f4!important;font-size:13px!important;font-weight:bold;line-height:1.8;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
             .diar-home .diar-product-title:hover{color:#00f477!important}
             .diar-home .diar-product-summary{color:#929c95!important;font-size:11px;line-height:1.8}
-            .diar-home .diar-product-price{color:#00f477!important;font-size:14px!important;font-weight:900}
-            .diar-home .diar-discount{background:#00f477!important;color:#06140b!important;font-weight:900}
+            .diar-home .diar-product-price{color:#00f477!important;font-size:14px!important;font-weight:bold}
+            .diar-home .diar-discount{background:#00f477!important;color:#06140b!important;font-weight:bold}
             .diar-home .diar-product-card .line-through{color:#78827b!important}
             .diar-home .diar-product-card .text-\[\#71717a\]{color:#89938c!important}
             .diar-home .diar-cart-button{min-height:38px;background:#00f477!important;color:#06140b!important;border:1px solid #00f477;box-shadow:0 4px 15px rgba(0,244,119,.12)}
@@ -621,9 +621,9 @@
             .diar-home .diar-unavailable-button span{color:#ff7770!important}
             /* BANNERS */
             .diar-home .diar-feature-banner{background:radial-gradient(circle at 15% 50%,rgba(0,244,119,.13),transparent 45%),#101612!important;border:1px solid #29372e;box-shadow:none}
-            .diar-home .diar-feature-label{display:inline-flex;width:fit-content;padding:7px 13px;border-radius:999px;background:rgba(0,244,119,.08);border:1px solid rgba(0,244,119,.2);color:#00f477;font-size:11px;font-weight:800}
+            .diar-home .diar-feature-label{display:inline-flex;width:fit-content;padding:7px 13px;border-radius:999px;background:rgba(0,244,119,.08);border:1px solid rgba(0,244,119,.2);color:#00f477;font-size:11px;font-weight:bold}
             .diar-home .diar-feature-title{color:#fff!important;line-height:1.6}.diar-home .diar-feature-description{color:#aab5ae!important;line-height:2}
-            .diar-home .diar-feature-button,.diar-home .diar-side-button{color:#06140b!important;background:#00f477!important;font-weight:800;transition:.2s}
+            .diar-home .diar-feature-button,.diar-home .diar-side-button{color:#06140b!important;background:#00f477!important;font-weight:bold;transition:.2s}
             .diar-home .diar-feature-button:hover,.diar-home .diar-side-button:hover{background:#39ff98!important;transform:translateY(-2px)}
             .diar-home .diar-side-banner{background:#101612;min-height:180px}.diar-home .diar-side-content{background:#191e1b;border:1px solid #2a332d}
             .diar-home .diar-side-content span{color:#f3f6f4!important}

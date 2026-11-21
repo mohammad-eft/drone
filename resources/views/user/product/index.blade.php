@@ -39,7 +39,7 @@
         <div class="flex items-center gap-2 text-xs text-[#929B95] mb-7">
             <a href="/" class="hover:text-[#00F477] transition">خانه</a>
             <span>/</span>
-            <span class="text-[#00F477] font-semibold">محصولات</span>
+            <span class="text-[#00F477] font-bold">محصولات</span>
         </div>
 
         {{-- Page heading --}}
@@ -50,7 +50,7 @@
                     <span class="text-[11px] font-bold tracking-wide text-[#00F477]">DIAARABZAR CATALOG</span>
                 </div>
 
-                <h1 id="title" class="text-2xl md:text-3xl font-black text-[#F4F7F5]">
+                <h1 id="title" class="text-2xl md:text-3xl font-bold text-[#F4F7F5]">
                     همه محصولات
                 </h1>
 
@@ -95,7 +95,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-sm font-black text-[#F4F7F5]">فیلتر محصولات</h2>
+                                <h2 class="text-sm font-bold text-[#F4F7F5]">فیلتر محصولات</h2>
                                 <p class="text-[10px] text-[#929B95] mt-1">انتخاب دقیق‌تر محصول</p>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
 
                     {{-- Categories --}}
                     <section class="px-5 py-5 border-b border-[#2A302C]">
-                        <h3 class="text-xs font-black text-[#F4F7F5] mb-4">دسته‌بندی محصولات</h3>
+                        <h3 class="text-xs font-bold text-[#F4F7F5] mb-4">دسته‌بندی محصولات</h3>
 
                         <div class="category-scroll space-y-3 max-h-[260px] overflow-y-auto pl-1">
                             @foreach ($categories as $category)
@@ -138,7 +138,7 @@
 
                     {{-- Price --}}
                     <section class="px-5 py-5 border-b border-[#2A302C]">
-                        <h3 class="text-xs font-black text-[#F4F7F5] mb-4">محدوده قیمت</h3>
+                        <h3 class="text-xs font-bold text-[#F4F7F5] mb-4">محدوده قیمت</h3>
 
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -182,7 +182,7 @@
 
                     <div class="px-5 pb-5 md:hidden">
                         <button id="applyFilters" type="button"
-                            class="w-full bg-[#00F477] hover:bg-[#39FF98] text-[#06140B] rounded-xl py-3 text-xs font-black transition">
+                            class="w-full bg-[#00F477] hover:bg-[#39FF98] text-[#06140B] rounded-xl py-3 text-xs font-bold transition">
                             نمایش محصولات
                         </button>
                     </div>
@@ -213,7 +213,7 @@
 
                         <div class="flex items-center gap-1 overflow-x-auto max-w-full">
                             <button type="button"
-                                class="sort-btn whitespace-nowrap text-[11px] font-black text-[#00F477] bg-[#202522] px-3 py-2 rounded-lg transition"
+                                class="sort-btn whitespace-nowrap text-[11px] font-bold text-[#00F477] bg-[#202522] px-3 py-2 rounded-lg transition"
                                 data-sort-by="created_at" data-sort-type="desc">
                                 جدیدترین
                             </button>
@@ -255,7 +255,7 @@
                             {{-- Discount --}}
                             @if ($product->percent)
                                 <span
-                                    class="absolute top-3 right-3 z-10 bg-[#00F477] text-[#06140B] rounded-lg text-[10px] font-black px-2 py-1 in-fa">
+                                    class="absolute top-3 right-3 z-10 bg-[#00F477] text-[#06140B] rounded-lg text-[10px] font-bold px-2 py-1 in-fa">
                                     {{ $product->percent }}٪ تخفیف
                                 </span>
                             @endif
@@ -293,7 +293,7 @@
                                     </div>
 
                                     <div class="flex items-end justify-between gap-1">
-                                        <strong class="text-sm md:text-base font-black text-[#00F477] in-fa">
+                                        <strong class="text-sm md:text-base font-bold text-[#00F477] in-fa">
                                             {{ $product->secondary_price }}
                                         </strong>
                                         <span class="text-[10px] text-[#929B95]">تومان</span>
@@ -304,7 +304,7 @@
                                     </div>
 
                                     <div class="flex items-end justify-between gap-1">
-                                        <strong class="text-sm md:text-base font-black text-[#00F477] in-fa">
+                                        <strong class="text-sm md:text-base font-bold text-[#00F477] in-fa">
                                             {{ $product->primary_price }}
                                         </strong>
                                         <span class="text-[10px] text-[#929B95]">تومان</span>
@@ -315,12 +315,12 @@
                             {{-- Stock --}}
                             <div class="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-[#2A302C]">
                                 @if ($product->count > 0)
-                                    <span class="flex items-center gap-1.5 text-[10px] text-[#00F477] font-semibold">
+                                    <span class="flex items-center gap-1.5 text-[10px] text-[#00F477] font-bold">
                                         <span class="w-1.5 h-1.5 rounded-full bg-[#00F477]"></span>
                                         موجود در انبار
                                     </span>
                                 @else
-                                    <span class="flex items-center gap-1.5 text-[10px] text-red-400 font-semibold">
+                                    <span class="flex items-center gap-1.5 text-[10px] text-red-400 font-bold">
                                         <span class="w-1.5 h-1.5 rounded-full bg-red-400"></span>
                                         ناموجود
                                     </span>
@@ -351,14 +351,14 @@
                         </svg>
                     </div>
 
-                    <h2 class="text-base font-black text-[#F4F7F5]">محصولی پیدا نشد</h2>
+                    <h2 class="text-base font-bold text-[#F4F7F5]">محصولی پیدا نشد</h2>
 
                     <p class="text-xs text-[#929B95] mt-3 leading-7">
                         با این شرایط محصولی پیدا نکردیم. فیلترها را تغییر دهید و دوباره امتحان کنید.
                     </p>
 
                     <button type="button" onclick="document.getElementById('resetFilters').click()"
-                        class="mt-5 bg-[#00F477] hover:bg-[#39FF98] text-[#06140B] text-xs font-black rounded-xl px-6 py-3 transition">
+                        class="mt-5 bg-[#00F477] hover:bg-[#39FF98] text-[#06140B] text-xs font-bold rounded-xl px-6 py-3 transition">
                         حذف فیلترها
                     </button>
                 </div>
