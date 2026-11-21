@@ -1,6 +1,6 @@
 @extends('admin.app.dashboard')
 @section('title')
-    دیارابزار | ایجاد پک
+    پهپاد استور | ایجاد پک
 @endsection
 @section('content')
     <style>

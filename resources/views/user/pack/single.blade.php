@@ -1,6 +1,6 @@
 @extends('app.document')
 @section('title')
-    دیارابزار | {{ $pack->title }}
+    پهپاد استور | {{ $pack->title }}
 @endsection
 @section('content')
     <style>

@@ -10,7 +10,7 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/tailwind.js') }}"></script>
 
-    <title>ورود | دیارابزار</title>
+    <title>ورود | پهپاد استور</title>
     <style>
         :root {
             --diyar-navy: #010348;
@@ -136,7 +136,7 @@
                 <div class="w-full flex flex-row justify-center items-center animate-fadeIn">
                     {{-- <img class="max-md:w-4/12 w-8/12" src="{{ asset('assets/img/e125edbd-f303-47f3-9dbc-af414f99ccb2.webp') }}" alt=""> --}}
                     <div class="text-center">
-                        <h2 class="text-center font-black text-white text-5xl mb-2 drop-shadow-lg tracking-wide">دیار ابزار</h2>
+                        <h2 class="text-center font-black text-white text-5xl mb-2 drop-shadow-lg tracking-wide">پهپاد استور</h2>
                         <div class="w-20 h-1 bg-gradient-to-l from-[#ff0000] via-white to-[#007fff] mx-auto rounded-full"></div>
                         <p class="text-white/80 text-sm mt-2">فروشگاه آنلاین ابزار و تجهیزات</p>
                     </div>
@@ -277,7 +277,7 @@
         <div
             class="brand-footer w-full h-12 absolute bottom-0 flex flex-row gap-4 justify-center items-center text-white shadow-lg">
             <div class="flex items-center gap-2">
-                <span class="text-sm font-bold">دیارابزار</span>
+                <span class="text-sm font-bold">پهپاد استور</span>
             </div>
             <a href="tel:09147794595" class="text-sm hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

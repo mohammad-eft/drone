@@ -1,5 +1,5 @@
 @extends('app.document')
-@section('title', 'دیارابزار | جست و جو')
+@section('title', 'پهپاد استور | جست و جو')
 @section('content')
     @if (session('success'))
         <div

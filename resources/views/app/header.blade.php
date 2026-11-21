@@ -297,7 +297,7 @@ body {
 
                         <img
                             src="{{ asset('storage/' . $setting['logo']) }}"
-                            alt="دیار ابزار"
+                            alt="پهپاد استور"
                             class="max-w-28">
 
                     </a>
@@ -530,7 +530,7 @@ body {
                            class="w-2/3 h-full">
 
                             <img src="{{ asset('storage/' . $setting['logo']) }}"
-                                 alt="دیار ابزار"
+                                 alt="پهپاد استور"
                                  class="w-full h-full object-contain">
 
                         </a>
@@ -627,7 +627,7 @@ body {
                         <input type="text"
                                name="title"
                                class="outline-none w-full h-full max-sm:text-[15px]"
-                               placeholder="جستجو در محصولات دیار ابزار">
+                               placeholder="جستجو در محصولات پهپاد استور">
 
                         <button class="cursor-pointer size-10 flex justify-center items-center">
 

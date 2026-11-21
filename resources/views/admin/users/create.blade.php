@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | ایجاد کاربر')
+@section('title', 'پهپاد استور | ایجاد کاربر')
 @section('content')
 
     <div class="pt-3 my-4 lg:my-8">

@@ -1,7 +1,7 @@
 @extends('app.document')
 
 @section('title')
-    دیارابزار | {{ $product->title }}
+    پهپاد استور | {{ $product->title }}
 @endsection
 
 @section('content')
@@ -390,12 +390,12 @@
                                                     <path d="M5 10v10h14V10M9 20v-6h6v6" />
                                                 </svg>
                                             </span>
-                                            <span class="font-bold text-sm text-[#F4F7F5]">دیارابزار</span>
+                                            <span class="font-bold text-sm text-[#F4F7F5]">پهپاد استور</span>
                                         </div>
                                     </div>
 
                                     <span class="text-[10px] text-[#00F477] bg-[#202522] px-2.5 py-1.5 rounded-full">
-                                        فروشگاه دیارابزار
+                                        فروشگاه پهپاد استور
                                     </span>
 
                                 </div>
@@ -448,7 +448,7 @@
                                             </div>
 
                                             <p class="text-xs text-[#929B95] leading-6">
-                                                برای اطلاع از قیمت و شرایط خرید این محصول، با کارشناسان دیارابزار تماس
+                                                برای اطلاع از قیمت و شرایط خرید این محصول، با کارشناسان پهپاد استور تماس
                                                 بگیرید.
                                             </p>
 
@@ -546,7 +546,7 @@
                                             <path d="M12 3 4.5 6v5.5c0 4.5 3.2 7.8 7.5 9.5 4.3-1.7 7.5-5 7.5-9.5V6L12 3Z" />
                                             <path d="m9 12 2 2 4-4" />
                                         </svg>
-                                        خرید از فروشگاه دیارابزار
+                                        خرید از فروشگاه پهپاد استور
                                     </div>
 
                                     <div class="flex items-center gap-2.5 text-xs text-[#929B95]">

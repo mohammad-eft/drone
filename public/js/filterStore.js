@@ -239,7 +239,7 @@ function createProductCard(product) {
     const image = link.querySelector('img');
 
     image.src = imgPath + product.image;
-    image.alt = product.title || 'محصول دیارابزار';
+    image.alt = product.title || 'محصول پهپاد استور';
 
     link.querySelector('.product-title').textContent = product.title || '';
 

@@ -1,5 +1,5 @@
 {{-- @extends('app.document')
-@section('title', 'دیارابزار | تیکت')
+@section('title', 'پهپاد استور | تیکت')
 @section('content')
  <div class="pt-3 mt-4 lg:mt-8">
         <div class="shadow__profaill__karbary rounded-md lg:p-5 p-2 mb-3 lg:mb-5">
@@ -38,7 +38,7 @@
 @endsection --}}
 
 @extends('app.document')
-@section('title', 'دیارابزار | جزئیات تیکت')
+@section('title', 'پهپاد استور | جزئیات تیکت')
 @section('content')
 <div class="pt-3 mt-4 lg:mt-8">
     <div class="shadow__profaill__karbary bg-white rounded-md
