@@ -15,6 +15,7 @@
                 </div>
                 <!-- address -->
                 <!-- servis -->
+                @if(isset($setting['footerServices']))
                 <div class="sm:w-1/2 w-full h-full flex flex-col gap-3 justify-start items-start">
                     <div class="flex w-full h-full">
                         <div class="w-1/2 h-full flex flex-col gap-3 justify-start items-start">
@@ -44,6 +45,7 @@
                     </div>
                 </div>
                 <!-- servis -->
+                @endif
             </div>
             <!-- news -->
             <div class="w-full md:w-1/3 h-full flex flex-col justify-center items-start">
