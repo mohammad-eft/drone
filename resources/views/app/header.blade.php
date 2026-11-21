@@ -65,7 +65,7 @@ body {
 #headerMenu ul li a span {
     color: #d1d5d4 !important;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 #headerMenu ul li a:hover span,
@@ -92,7 +92,7 @@ body {
 #headerMenu button#orderBasket span {
     background: var(--fly-green) !important;
     color: #07110b;
-    font-weight: 800;
+    font-weight: bold;
 }
 
 /* Search icon */
