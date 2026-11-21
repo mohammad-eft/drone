@@ -407,7 +407,7 @@
                 <div class="flex justify-center">
                     <a href="{{ route('home') }}" class="right-0 mr-[15px]">
                         @if (isset($setting['logo']))
-                            <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="w-40 h-15">
+                            <img src="{{ asset('storage/' . $setting['logo']) }}" alt="" class="max-w-40 h-15">
                         @endif
                     </a>
                 </div>

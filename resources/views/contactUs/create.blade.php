@@ -1,6 +1,6 @@
 @extends('app.document')
 
-@section('title', 'دیار ابزار | تماس با ما')
+@section('title', 'پهپاد استور | تماس با ما')
 
 @section('content')
 
@@ -258,7 +258,7 @@
                               style="background:var(--primary)"></span>
 
                         <span class="font-bold" style="color:var(--primary)">
-                            ارتباط با دیار ابزار
+                            ارتباط با پهپاد استور
                         </span>
                     </div>
 
@@ -277,7 +277,7 @@
                     <p class="text-sm sm:text-base leading-8 mt-4"
                        style="color:var(--text-secondary)">
                         از مشاوره انتخاب ابزار گرفته تا پیگیری سفارش و ثبت پیشنهادها،
-                        می‌توانید از طریق راه‌های ارتباطی دیار ابزار با ما در تماس باشید.
+                        می‌توانید از طریق راه‌های ارتباطی پهپاد استور با ما در تماس باشید.
                     </p>
 
                     <div class="mt-8 flex flex-wrap gap-3">
@@ -303,7 +303,7 @@
 
                     <img
                         src="{{ asset('img/contact.png') }}"
-                        alt="ارتباط با دیار ابزار"
+                        alt="ارتباط با پهپاد استور"
                         class="contact-image relative w-full h-full max-h-[430px] object-cover rounded-3xl shadow-2xl"
                     >
 
@@ -438,7 +438,7 @@
 
                                     <p class="text-sm mt-2 leading-7"
                                        style="color:var(--text-secondary)">
-                                        آدرس فروشگاه دیار ابزار
+                                        آدرس فروشگاه پهپاد استور
                                     </p>
 
                                 </div>
@@ -460,7 +460,7 @@
                             <div class="mt-5 flex items-center gap-2 font-bold text-sm"
                                  style="color:var(--primary)">
                                 <span>🔧</span>
-                                <span>دیار ابزار، همراه پروژه‌های شما</span>
+                                <span>پهپاد استور، همراه پروژه‌های شما</span>
                             </div>
 
                         </div>
@@ -647,7 +647,7 @@
 
                     <p class="text-sm sm:text-base mt-6 leading-8"
                        style="color:var(--text-secondary)">
-                        تیم دیار ابزار آماده دریافت سؤالات و درخواست‌های شماست.
+                        تیم پهپاد استور آماده دریافت سؤالات و درخواست‌های شماست.
                     </p>
 
                 </div>
@@ -746,7 +746,7 @@
 
                     <p class="text-sm mt-4"
                        style="color:var(--text-secondary)">
-                        پاسخ برخی از سؤالات رایج مشتریان دیار ابزار
+                        پاسخ برخی از سؤالات رایج مشتریان پهپاد استور
                     </p>
 
                 </div>
@@ -842,7 +842,7 @@
 
                         <p class="text-sm leading-8 mt-4"
                            style="color:var(--text-secondary)">
-                            بله، نظرات و پیشنهادهای شما برای بهبود خدمات دیار ابزار
+                            بله، نظرات و پیشنهادهای شما برای بهبود خدمات پهپاد استور
                             ارزشمند است. می‌توانید از طریق فرم تماس آن‌ها را ارسال کنید.
                         </p>
 
@@ -894,7 +894,7 @@
 
                         <p class="mt-4 text-sm sm:text-base leading-8 max-w-2xl mx-auto"
                            style="color:var(--text-secondary)">
-                            محصولات دیار ابزار را بررسی کنید و ابزار موردنیاز
+                            محصولات پهپاد استور را بررسی کنید و ابزار موردنیاز
                             پروژه و فعالیت خود را پیدا کنید.
                         </p>
 

@@ -1,6 +1,6 @@
 @extends('app.document')
 
-@section('title', 'دیارابزار | همه محصولات')
+@section('title', 'پهپاد استور | همه محصولات')
 
 @section('content')
 

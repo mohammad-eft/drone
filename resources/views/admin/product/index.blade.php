@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | همه محصولات')
+@section('title', 'پهپاد استور | همه محصولات')
 @section('content')
 
 <style>

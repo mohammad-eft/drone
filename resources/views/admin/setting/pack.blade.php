@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | تنظیمات پک ها')
+@section('title', 'پهپاد استور | تنظیمات پک ها')
 @section('content')
  <div class="max-w-4xl mx-auto">
 

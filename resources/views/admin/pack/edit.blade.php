@@ -1,7 +1,7 @@
 @extends('admin.app.dashboard')
 
 @section('title')
-    دیارابزار | ویرایش پک {{ $pack->title }}
+    پهپاد استور | ویرایش پک {{ $pack->title }}
 @endsection
 
 @section('content')

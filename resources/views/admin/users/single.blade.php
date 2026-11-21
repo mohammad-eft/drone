@@ -1,6 +1,6 @@
 @extends('admin.app.dashboard')
 @section('title')
-دیارابزار | {{ $user->name.' '.$user->family }}
+پهپاد استور | {{ $user->name.' '.$user->family }}
 @endsection
 @section('content')
         <div class="w-full">

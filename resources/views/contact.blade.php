@@ -1,7 +1,7 @@
 
 @extends('app.document')
 
-@section('title', 'دیارابزار | تماس با ما')
+@section('title', 'پهپاد استور | تماس با ما')
 
 @section('content')
 
@@ -177,7 +177,7 @@
                         <span class="w-12 h-[3px] rounded bg-[#00F477]"></span>
 
                         <span class="text-[#00F477] font-bold">
-                            ارتباط با دیار ابزار
+                            ارتباط با پهپاد استور
                         </span>
                     </div>
 
@@ -197,7 +197,7 @@
 
                 <img
                     src="{{ asset('img/contact-hero.svg') }}"
-                    alt="ابزارآلات دیار ابزار"
+                    alt="ابزارآلات پهپاد استور"
                     class="order-1 lg:order-2 w-full rounded-3xl border border-[#2A302C] shadow-[0_15px_45px_rgba(0,0,0,.25)]"
                 >
 
@@ -445,7 +445,7 @@
                     <img
                         src="{{ asset('img/contact-map.svg') }}"
                         class="w-full h-full object-cover"
-                        alt="نقشه موقعیت دیار ابزار"
+                        alt="نقشه موقعیت پهپاد استور"
                     >
 
                 </div>

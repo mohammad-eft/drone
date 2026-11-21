@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | لیست پک‌ها')
+@section('title', 'پهپاد استور | لیست پک‌ها')
 
 @section('content')
     <style>

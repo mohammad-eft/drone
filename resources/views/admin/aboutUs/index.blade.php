@@ -1,5 +1,5 @@
  {{-- @extends('admin.app.dashboard')
-    @section('title', 'دیارابزار | درباره ما')
+    @section('title', 'پهپاد استور | درباره ما')
     @section('content')
         <div class="w-full flex flex-col pb-4">
          <div class="bg-white rounded-lg">
@@ -80,7 +80,7 @@
 @endsection --}}
 
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | درباره ما')
+@section('title', 'پهپاد استور | درباره ما')
 @section('content')
 <div class="w-full flex flex-col pb-4">
     <div class="bg-white rounded-lg shadow-sm">

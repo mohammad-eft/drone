@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
     <link rel="icon" href="{{ asset('icon/faveicon.png') }}">
-    <title>ثبت نام | دیارابزار</title>
+    <title>ثبت نام | پهپاد استور</title>
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <style>
@@ -122,7 +122,7 @@
             <div class="flex flex-col my-12 items-center justify-center relative z-10 w-full">
                 <div class="w-full flex flex-row justify-center items-center animate-fadeIn">
                     <div class="text-center">
-                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">دیارابزار</h2>
+                        <h2 class="text-center font-bold text-white text-5xl mb-2 drop-shadow-lg">پهپاد استور</h2>
                         <div class="w-20 h-1 bg-gradient-to-l from-[#ff0000] via-white to-[#007fff] mx-auto rounded-full"></div>
                         <p class="text-white/80 text-sm">فروشگاه تخصصی ابزار</p>
                     </div>
@@ -272,7 +272,7 @@
     <footer class="md:hidden">
         <div class="footer-brand w-full h-12 absolute bottom-0 flex flex-row gap-4 justify-center items-center text-white shadow-lg">
             <div class="flex items-center gap-2">
-                <span class="text-sm">دیارابزار</span>
+                <span class="text-sm">پهپاد استور</span>
             </div>
             <a href="tel:09142302912" class="text-sm hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

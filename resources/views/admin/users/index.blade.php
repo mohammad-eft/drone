@@ -1,5 +1,5 @@
 @extends('admin.app.dashboard')
-@section('title', 'دیارابزار | همه کاربران')
+@section('title', 'پهپاد استور | همه کاربران')
 @section('content')
 <div class="w-full flex flex-col pb-4">
     <div class="bg-white rounded-lg">

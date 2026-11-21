@@ -1,6 +1,6 @@
 @extends('app.document')
 @section('title')
-    دیارابزار | ثبت سفارش
+    پهپاد استور | ثبت سفارش
 @endsection
 @section('content')
 

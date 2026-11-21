@@ -1,7 +1,7 @@
 
 @extends('app.document')
 
-@section('title', 'دیار ابزار | درباره ما')
+@section('title', 'پهپاد استور | درباره ما')
 
 @section('content')
 
@@ -172,7 +172,7 @@
 
     {{-- Top Bar --}}
     <div class="about-topbar text-center text-xs sm:text-sm py-2 px-4 font-bold">
-        دیار ابزار؛ همراه مطمئن شما در انتخاب ابزار مناسب
+        پهپاد استور؛ همراه مطمئن شما در انتخاب ابزار مناسب
     </div>
 
     <main>
@@ -191,7 +191,7 @@
 
                         <span class="font-bold text-sm"
                               style="color:var(--primary)">
-                            آشنایی با دیار ابزار
+                            آشنایی با پهپاد استور
                         </span>
 
                     </div>
@@ -203,7 +203,7 @@
 
                     <p class="mt-6 text-sm sm:text-base leading-9 max-w-xl"
                        style="color:var(--text-secondary)">
-                        دیار ابزار با هدف فراهم کردن دسترسی آسان به ابزارآلات
+                        پهپاد استور با هدف فراهم کردن دسترسی آسان به ابزارآلات
                         ساختمانی و صنعتی فعالیت می‌کند. ما باور داریم انتخاب
                         ابزار مناسب، فقط خرید یک محصول نیست؛ بلکه قدمی مهم
                         برای افزایش کیفیت، سرعت و دقت در انجام کارهاست.
@@ -225,7 +225,7 @@
 
                         <a href="#why-diar"
                            class="about-secondary-btn px-7 py-3.5 rounded-xl font-bold">
-                            چرا دیار ابزار؟
+                            چرا پهپاد استور؟
                         </a>
 
                     </div>
@@ -236,7 +236,7 @@
 
                     <img
                         src="{{ asset('img/about.png') }}"
-                        alt="ابزارآلات ساختمانی و صنعتی دیار ابزار"
+                        alt="ابزارآلات ساختمانی و صنعتی پهپاد استور"
                         class="absolute inset-0 w-full h-full object-cover"
                     >
 
@@ -292,7 +292,7 @@
 
                     <p class="mt-5 text-sm sm:text-base leading-9"
                        style="color:var(--text-secondary)">
-                        در دیار ابزار تلاش می‌کنیم مجموعه‌ای کاربردی از
+                        در پهپاد استور تلاش می‌کنیم مجموعه‌ای کاربردی از
                         ابزارآلات موردنیاز پروژه‌های ساختمانی، صنعتی و فنی
                         در اختیار شما قرار دهیم.
                     </p>
@@ -388,7 +388,7 @@
                 <div class="text-center mb-12">
 
                     <h2 class="diar-line text-2xl sm:text-3xl font-bold text-[#F4F7F5]">
-                        چرا دیار ابزار؟
+                        چرا پهپاد استور؟
                     </h2>
 
                     <p class="mt-6 text-sm sm:text-base leading-8"
@@ -508,7 +508,7 @@
 
                         <p class="mt-4 text-sm sm:text-base leading-9"
                            style="color:var(--text-secondary)">
-                            به همین دلیل، در دیار ابزار به دنبال ایجاد
+                            به همین دلیل، در پهپاد استور به دنبال ایجاد
                             تجربه‌ای ساده، شفاف و قابل اعتماد هستیم؛
                             تجربه‌ای که در آن نیاز مشتری در اولویت قرار دارد.
                         </p>
@@ -553,7 +553,7 @@
 
                     <p class="mt-6 text-sm"
                        style="color:var(--text-secondary)">
-                        اصولی که مسیر فعالیت دیار ابزار را شکل می‌دهند.
+                        اصولی که مسیر فعالیت پهپاد استور را شکل می‌دهند.
                     </p>
 
                 </div>
