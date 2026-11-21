@@ -80,7 +80,7 @@
                         <div class="rounded-2xl bg-white border border-gray-100 p-4 text-center shadow-sm hover:shadow-md transition">
                             <div class="w-14 h-14 mx-auto mb-3 rounded-xl bg-{{ $color }}-50 flex items-center justify-center overflow-hidden">
                                 <img id="previewImage{{ $i }}"
-                                     src="{{ asset('storage/'.$image->meta_value) ?? '' }}"
+                                     src="{{ $image ? asset('storage/'.$image->meta_value) : '' }}"
                                      alt=""
                                      class="w-full h-full object-contain {{ isset($image) && asset('storage/'.$image->meta_value) ? '' : 'hidden' }}">
                                 <div id="previewPlaceholder{{ $i }}"
@@ -181,7 +181,7 @@
                             <div class="group border-2 border-dashed border-gray-200 rounded-xl p-4 text-center hover:border-{{ $color }}-400 hover:bg-{{ $color }}-50/30 transition cursor-pointer relative"
                                  onclick="document.getElementById('serviceImage{{ $n }}').click()">
                                 <img id="serviceImagePreview{{ $n }}"
-                                     src="{{ asset('storage/'.$image->meta_value) ?? '' }}"
+                                     src="{{ $image ? asset('storage/'.$image->meta_value) : '' }}"
                                      alt=""
                                      class="w-full h-32 object-contain rounded-lg mb-3 bg-gray-50 {{ isset($image) && asset('storage/'.$image->meta_value) ? '' : 'hidden' }}">
                                 <div id="serviceImagePlaceholder{{ $n }}"

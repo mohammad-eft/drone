@@ -32,7 +32,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                         <label for="packTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان اصلی</label>
                         <div class="md:col-span-2">
-                            <input type="text" id="packTitle" name="setting[packTitle]" placeholder="پک های آماده برای هر موقعیت" value="{{ $packTitle->meta_value }}"
+                            <input type="text" id="packTitle" name="setting[packTitle]" placeholder="پک های آماده برای هر موقعیت" value="{{ $packTitle ? $packTitle->meta_value : '' }}"
                                 class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition">
                         </div>
                     </div>
@@ -42,21 +42,21 @@
                         <label for="packSubtitle" class="text-sm font-medium text-gray-700 md:pt-2.5">عنوان فرعی</label>
                         <div class="md:col-span-2">
                             <input type="text" id="packSubtitle" name="setting[packSubtitle]" placeholder="با انتخاب هر پک، مجموعه ای از محصولات کاربردی و مرتبط با موضوع را در یک بسته دریافت کنید"
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packSubtitle->meta_value }}">
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packSubtitle ? $packSubtitle->meta_value : '' }}">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                         <label for="packLinkTitle" class="text-sm font-medium text-gray-700 md:pt-2.5">متن دکمه</label>
                         <div class="md:col-span-2">
                             <input type="text" id="packLinkTitle" placeholder="مشاهده همه"
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkTitle->meta_value }}">
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkTitle ? $packLinkTitle->meta_value : '' }}">
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
                         <label for="packLinkUrl" class="text-sm font-medium text-gray-700 md:pt-2.5">متن دکمه</label>
                         <div class="md:col-span-2">
                             <input type="text" dir="ltr" id="packLinkUrl" name="setting[packLinkUrl]" placeholder="مشاهده همه"
-                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkUrl->meta_value }}">
+                                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none" value="{{ $packLinkUrl ? $packLinkUrl->meta_value : '' }}">
                         </div>
                     </div>
 

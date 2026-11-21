@@ -1,4 +1,4 @@
-let hamburgerMenu = document.getElementById('hamburgerMenu')
+hamburgerMenu = document.getElementById('hamburgerMenu')
 let openHamburgerMenu = document.getElementById('openHamburgerMenu')
 document.getElementById('openHamburgerMenu').addEventListener('click', () => {
     hamburgerMenu.classList.remove('invisible')

@@ -10,102 +10,322 @@
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/tailwind.js') }}"></script>
     <style>
+
+        /* ================= CIRCUITFLY SIGNUP THEME ================= */
+
         :root {
-            --brand-navy: #010348;
-            --brand-blue: #0055aa;
-            --brand-light-blue: #007fff;
-            --brand-red: #ff0000;
-            --brand-soft: #eef3ff;
+            --brand-navy: #090C0A;
+            --brand-blue: #191D1B;
+            --brand-light-blue: #00F477;
+            --brand-red: #00F477;
+            --brand-soft: #202522;
+
+            --fly-bg: #090C0A;
+            --fly-panel: #191D1B;
+            --fly-panel-2: #202522;
+            --fly-border: #2A302C;
+            --fly-green: #00F477;
+            --fly-text: #F4F7F5;
+            --fly-muted: #929B95;
         }
 
         body {
-            background: #f5f7fc;
-            color: #172033;
+            background: var(--fly-bg) !important;
+            color: var(--fly-text) !important;
         }
 
+        /* Main background */
+        .bg-gradient-to-br {
+            background: var(--fly-bg) !important;
+        }
+
+        /* Form section */
+        .min-h-dvh.bg-white {
+            background: var(--fly-bg) !important;
+        }
+
+        /* Right branding section */
+        .bg-brand-gradient {
+            background:
+                    radial-gradient(circle at 18% 18%, rgba(0,244,119,.13), transparent 30%),
+                    radial-gradient(circle at 82% 82%, rgba(0,244,119,.07), transparent 28%),
+                    linear-gradient(135deg, #090C0A 0%, #101412 48%, #191D1B 100%) !important;
+        }
+
+        .bg-brand-gradient h2 {
+            color: var(--fly-text) !important;
+        }
+
+        .bg-brand-gradient p {
+            color: var(--fly-muted) !important;
+        }
+
+        .bg-brand-gradient .bg-gradient-to-l {
+            background: linear-gradient(
+                    to left,
+                    #00F477,
+                    #F4F7F5,
+                    #00F477
+            ) !important;
+        }
+
+        /* Form headings */
+        h1 {
+            color: var(--fly-text) !important;
+        }
+
+        .text-gray-500,
+        .text-gray-600,
+        .text-gray-700 {
+            color: var(--fly-muted) !important;
+        }
+
+        /* Inputs */
         input {
-            transition: all .25s ease;
-            color: #172033 !important;
+            background: #101412 !important;
+            color: var(--fly-text) !important;
+            border-color: var(--fly-border) !important;
         }
 
         input::placeholder {
-            color: #94a3b8 !important;
-            opacity: 1;
+            color: #77817C !important;
+        }
+
+        input:hover {
+            border-color: #3A4540 !important;
         }
 
         input:focus {
-            border-color: var(--brand-light-blue) !important;
-            box-shadow: 0 0 0 3px rgba(0, 127, 255, .12) !important;
-            outline: none !important;
+            border-color: var(--fly-green) !important;
+            box-shadow: 0 0 0 3px rgba(0,244,119,.10) !important;
         }
 
-        input:focus::placeholder { color: #94a3b8 !important; }
-
         input:focus + span svg,
-        .group:focus-within span svg { color: var(--brand-blue) !important; }
+        .group:focus-within span svg {
+            color: var(--fly-green) !important;
+        }
 
+        /* Input icons */
+        .group > span {
+            color: var(--fly-muted) !important;
+        }
+
+        /* Autofill */
         input:-webkit-autofill,
         input:-webkit-autofill:hover,
         input:-webkit-autofill:focus,
         input:-webkit-autofill:active {
+            -webkit-text-fill-color: var(--fly-text) !important;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: #172033 !important;
             transition: background-color 5000s ease-in-out 0s;
-            box-shadow: inset 0 0 20px 20px #f8faff !important;
+            box-shadow: inset 0 0 20px 20px #101412 !important;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fadeIn { animation: fadeIn .8s ease-out; }
-
-        .bg-brand-gradient {
-            background:
-                radial-gradient(circle at 18% 18%, rgba(0,127,255,.32), transparent 30%),
-                radial-gradient(circle at 82% 82%, rgba(255,0,0,.20), transparent 28%),
-                linear-gradient(135deg, #010348 0%, #07145c 48%, #0055aa 100%);
-        }
-
+        /* Brand buttons */
         .btn-brand {
-            background: linear-gradient(110deg, #010348 0%, #0055aa 58%, #007fff 100%);
-            transition: all .25s ease;
+            background: linear-gradient(
+                    110deg,
+                    #00F477 0%,
+                    #00D968 58%,
+                    #39FF98 100%
+            ) !important;
+            color: #06140B !important;
         }
 
         .btn-brand:hover {
-            background: linear-gradient(110deg, #010348 0%, #00458f 58%, #006de0 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 22px -7px rgba(0, 85, 170, .32);
+            background: linear-gradient(
+                    110deg,
+                    #00D968 0%,
+                    #00C960 58%,
+                    #00F477 100%
+            ) !important;
+            box-shadow: 0 10px 22px -7px rgba(0,244,119,.25) !important;
         }
 
         .btn-brand:disabled {
-            background: #94a3b8 !important;
-            transform: none;
-            box-shadow: none;
-            cursor: not-allowed;
+            background: #343B37 !important;
+            color: #929B95 !important;
         }
 
-        .footer-brand {
-            background: linear-gradient(90deg, #010348, #0055aa, #010348);
+        /* Send code button */
+        #countDown {
+            background: #202522 !important;
+            color: var(--fly-green) !important;
+            border: 1px solid #354139 !important;
         }
 
-        .closeButtonXmark:hover svg path { fill: var(--brand-red) !important; }
+        #countDown:hover {
+            background: #26352C !important;
+            border-color: var(--fly-green) !important;
+        }
+
+        #countDown:disabled {
+            background: #171D19 !important;
+            color: var(--fly-muted) !important;
+        }
+
+        /* Rules checkbox section */
+        #rule {
+            accent-color: var(--fly-green);
+        }
+
+        #rule:focus {
+            box-shadow: 0 0 0 3px rgba(0,244,119,.12) !important;
+        }
+
+        form > div:has(#rule) {
+            background: #101A13 !important;
+            border-color: #263B2D !important;
+        }
+
+        form > div:has(#rule) label {
+            color: var(--fly-muted) !important;
+        }
+
+        form > div:has(#rule) label span.text-\[\#07145c\] {
+            color: var(--fly-green) !important;
+        }
+
+        /* Rules modal */
+        #rules {
+            background: rgba(0,0,0,.78) !important;
+            backdrop-filter: blur(7px);
+        }
 
         #rules > div {
-            max-width: calc(100% - 24px);
+            background: #101412 !important;
+            border: 1px solid var(--fly-border) !important;
+            box-shadow: 0 20px 60px rgba(0,0,0,.5) !important;
         }
 
-        #signupButton { border: 0; }
+        #rules > div > div:first-child {
+            background: linear-gradient(
+                    to left,
+                    #101A13,
+                    #191D1B
+            ) !important;
+            color: var(--fly-green) !important;
+            border-bottom: 1px solid var(--fly-border);
+        }
 
+        #rules p {
+            color: #C5CEC9 !important;
+        }
+
+        #rules .absolute.bottom-4 span {
+            background: var(--fly-green) !important;
+            color: #06140B !important;
+        }
+
+        #rules .absolute.bottom-4 span:hover {
+            background: #39FF98 !important;
+        }
+
+        #rules .closeButtonXmark {
+            background: #202522 !important;
+            border-color: var(--fly-border) !important;
+            color: var(--fly-text) !important;
+        }
+
+        #rules .closeButtonXmark:hover {
+            border-color: var(--fly-green) !important;
+        }
+
+        .closeButtonXmark:hover svg path {
+            fill: var(--fly-green) !important;
+        }
+
+        /* Login link */
+        a.text-\[\#07145c\] {
+            color: var(--fly-green) !important;
+        }
+
+        a.text-\[\#07145c\]:hover {
+            color: #39FF98 !important;
+        }
+
+        /* Loader */
+        #loader {
+            background: rgba(0,0,0,.78) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        #loader > div {
+            background: #171D19 !important;
+            border: 1px solid var(--fly-border);
+        }
+
+        #loader .animate-spin {
+            border-color: var(--fly-green) !important;
+            border-top-color: transparent !important;
+        }
+
+        #loader span {
+            color: var(--fly-text) !important;
+        }
+
+        /* Message popup */
+        #message > div {
+            background: #191D1B !important;
+            border: 1px solid var(--fly-border);
+        }
+
+        #message > div span {
+            color: var(--fly-green) !important;
+        }
+
+        #message svg {
+            fill: var(--fly-muted) !important;
+        }
+
+        /* Footer */
+        .footer-brand {
+            background: linear-gradient(
+                    90deg,
+                    #090C0A,
+                    #191D1B,
+                    #090C0A
+            ) !important;
+            border-top: 1px solid var(--fly-border);
+        }
+
+        footer a {
+            color: var(--fly-text) !important;
+        }
+
+        footer a:hover {
+            color: var(--fly-green) !important;
+        }
+
+        /* Desktop phone button */
+        .fixed.bottom-4.left-4 a {
+            background: #191D1B !important;
+            border-color: var(--fly-border) !important;
+        }
+
+        .fixed.bottom-4.left-4 a > div {
+            background: #202522 !important;
+        }
+
+        .fixed.bottom-4.left-4 svg {
+            color: var(--fly-green) !important;
+        }
+
+        .fixed.bottom-4.left-4 span {
+            color: var(--fly-text) !important;
+        }
+
+        /* Responsive */
         @media (max-width: 767px) {
-            body { min-height: 100dvh; }
-            #rules > div {
-                width: calc(100% - 24px);
-                height: calc(100dvh - 40px);
-                margin-top: 20px;
+            body {
+                background: var(--fly-bg) !important;
+            }
+
+            .footer-brand {
+                background: #090C0A !important;
             }
         }
+
     </style>
 </head>
 
@@ -113,7 +333,7 @@
     <div class="absolute -top-5 invisible opacity-0 right-1/2 translate-x-1/2 w-2/3 z-999999 transition-all duration-500 ease-in-out" id="message"></div>
     <div class="w-full min-h-dvh flex flex-col justify-start items-center md:flex-row-reverse">
         <!-- بخش راست با تم بنفش -->
-                <div class="flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh bg-brand-gradient relative overflow-hidden w-full lg:w-1/2">
+                <div class="hidden lg:flex justify-center max-sm:h-30 max-md:h-35 md:h-dvh bg-brand-gradient relative overflow-hidden w-full lg:w-1/2">
             <!-- المان‌های تزئینی -->
             <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-10 left-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
@@ -193,7 +413,7 @@
                                 onchange="checkRule()" id="rule">
                             <label for="rule" class="text-sm text-gray-600 cursor-pointer">
                                 <span>قوانین و مقررات را </span>
-                                <span class="text-[#07145c] font-semibold hover:text-[#0055aa] cursor-pointer transition-colors" onclick="rules('open')">مطالعه</span>
+                                <span class="text-[#07145c] font-bold hover:text-[#0055aa] cursor-pointer transition-colors" onclick="rules('open')">مطالعه</span>
                                 <span> کردم و می‌پذیرم</span>
                             </label>
                         </div>
@@ -249,7 +469,7 @@
                         <div class="w-full text-center mt-2">
                             <span class="text-sm text-gray-600">
                                 قبلاً ثبت نام کرده‌اید؟
-                                <a href="{{ route('login') }}" class="text-[#07145c] font-semibold hover:text-[#0055aa] transition-colors mr-1">
+                                <a href="{{ route('login') }}" class="text-[#07145c] font-bold hover:text-[#0055aa] transition-colors mr-1">
                                     وارد شوید
                                 </a>
                             </span>
@@ -274,24 +494,24 @@
             <div class="flex items-center gap-2">
                 <span class="text-sm">پهپاد استور</span>
             </div>
-            <a href="tel:09142302912" class="text-sm hover:underline flex items-center gap-1">
+            <a href="tel:09123456789" class="text-sm hover:underline flex items-center gap-1">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
-                <b>09142302912</b>
+                <b>09123456789</b>
             </a>
         </div>
     </footer>
 
     <!-- فوتر دسکتاپ -->
     <div class="hidden md:block fixed bottom-4 left-4">
-        <a href="tel:09142302912" class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-shadow border border-[#dbe6f8]">
+        <a href="tel:09123456789" class="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-shadow border border-[#dbe6f8]">
             <div class="w-8 h-8 bg-[#eef3ff] rounded-full flex items-center justify-center">
                 <svg class="w-4 h-4 text-[#07145c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                 </svg>
             </div>
-            <span class="text-gray-700 font-medium">09142302912</span>
+            <span class="text-gray-700 font-medium">09123456789</span>
         </a>
     </div>
 
