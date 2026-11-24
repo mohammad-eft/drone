@@ -117,7 +117,7 @@ class ProductController extends Controller
     {
         $catIds = product::find($request['id'])->categories->pluck('id');
         $product = product::find($request['id'])->load('attributes')->load('categories');
-        $categories = category::whereNot('title', 'بدون دسته بندی')->where(['parent_id', 0])->get();
+        $categories = category::whereNot('title', 'بدون دسته بندی')->where('parent_id', 0)->get();
         if ($product->media->isNotEmpty()) {
             foreach ($product->media as $media) {
                 $media->media_path = asset('storage/' . $media['media_path']);
