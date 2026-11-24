@@ -144,7 +144,7 @@ function getQuantityControl(cart, type) {
     const isMaxQuantity = quantity >= stock;
 
     const wrapperClass = `
-        w-full lg:w-1/2 h-full flex gap-1 justify-center items-center
+        w-fit h-8 flex gap-1 justify-center items-center
         ${className}
     `;
 
@@ -259,35 +259,33 @@ if (localProducts.length && cartItemsBlock) {
                         alt="${cart.title}">
                 </div>
 
-                <div class="flex-1 min-w-0">
+                <div class="flex-1 min-w-0 flex flex-col items-start gap-2">
 
-                    <h3 class="${cartTitleStyle}">
+                    <h3 class="${cartTitleStyle} w-full">
                         ${cart.title}
                     </h3>
 
-                    <p class="${cartSummaryStyle}">
-                        ${cart.summary || ''}
-                    </p>
+                    ${cart.primary_price || cart.secondary_price
+                ? `
+                            <div class="flex items-baseline gap-1">
+                                <span class="${cartPriceStyle}">
+                                    ${cart.secondary_price || cart.primary_price}
+                                </span>
+                                <span class="${cartCurrencyStyle}">تومان</span>
+                            </div>
+                        `
+                : `
+                            <span class="inline-flex items-center rounded-lg border border-[#3A443E] bg-[#202722] px-2.5 py-1 text-[10px] sm:text-xs font-medium text-[#B8C2BB]">
+                                برای استعلام قیمت تماس بگیرید
+                            </span>
+                        `
+            }
 
-                    ${getQuantityControl(cart, 'product')}
+                    <div class="mt-1">
+                        ${getQuantityControl(cart, 'product')}
+                    </div>
 
                 </div>
-
-                ${cart.primary_price || cart.secondary_price
-                ? `
-                        <div class="text-left shrink-0">
-                            <p class="${cartPriceStyle}">
-                                ${cart.secondary_price || cart.primary_price}
-                            </p>
-                            <p class="${cartCurrencyStyle}">تومان</p>
-                        </div>
-                    `
-                : `
-                        <div class="text-xs sm:text-sm text-[#929B95] text-center shrink-0">
-                            جهت استعلام قیمت تماس بگیرید
-                        </div>
-                    `
-            }
 
             </div>
         `;
@@ -328,25 +326,23 @@ if (localPacks.length && cartItemsBlock) {
                         alt="${cart.title}">
                 </div>
 
-                <div class="flex-1 min-w-0">
+                <div class="flex-1 min-w-0 flex flex-col items-start gap-2">
 
-                    <h3 class="${cartTitleStyle}">
+                    <h3 class="${cartTitleStyle} w-full">
                         ${cart.title}
                     </h3>
 
-                    <p class="${cartSummaryStyle}">
-                        ${cart.summary || ''}
-                    </p>
+                    <div class="flex items-baseline gap-1">
+                        <span class="${cartPriceStyle}">
+                            ${cart.secondary_price || cart.primary_price}
+                        </span>
+                        <span class="${cartCurrencyStyle}">تومان</span>
+                    </div>
 
-                    ${getQuantityControl(cart, 'pack')}
+                    <div class="mt-1">
+                        ${getQuantityControl(cart, 'pack')}
+                    </div>
 
-                </div>
-
-                <div class="text-left shrink-0">
-                    <p class="${cartPriceStyle}">
-                        ${cart.secondary_price || cart.primary_price}
-                    </p>
-                    <p class="${cartCurrencyStyle}">تومان</p>
                 </div>
 
             </div>

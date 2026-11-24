@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" class="bg-bg">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>مدار فلای | تجهیزات تخصصی پهپاد و FPV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { bg: '#0a0a0a', panel: '#141414', panel2: '#1a1a1a', line: '#262626', g: '#00ff66' }, fontFamily: { dis: ['Orbitron', 'Vazirmatn', 'Arial Black', 'sans-serif'], ui: ['Vazirmatn', 'Inter', 'system-ui', 'sans-serif'] } } } }
+    </script>
+    <style>
+        :root {
+            color-scheme: dark;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px)
+        }
+
+        .noscroll {
+            scrollbar-width: none
+        }
+
+        .noscroll::-webkit-scrollbar {
+            display: none
+        }
+
+        body {
+            direction: rtl;
+            text-align: right
+        }
+
+        input,
+        button {
+            font: inherit
+        }
+
+        input::placeholder {
+            font-family: Vazirmatn, sans-serif
+        }
+
+        .font-dis {
+            font-family: Orbitron, Vazirmatn, Arial, sans-serif
+        }
+    </style>
+</head>
+
+<body class="bg-bg text-white font-ui antialiased overflow-x-clip" dir="rtl">
+    <svg width="0" height="0" class="absolute">
+        <defs>
+            <symbol id="chip" viewBox="0 0 24 24">
+                <rect x="6" y="6" width="12" height="12" rx="1" />
+                <rect x="9.5" y="9.5" width="5" height="5" />
+                <path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4" />
+            </symbol>
+            <symbol id="cart" viewBox="0 0 24 24">
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="18" cy="20" r="1.4" />
+                <path d="M2 3h3l2.6 12.4h11.2L21 7H6" />
+            </symbol>
+            <symbol id="plus" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" />
+            </symbol>
+            <symbol id="heart" viewBox="0 0 24 24">
+                <path d="M12 21s-8-5.3-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.7-8 11-8 11z" />
+            </symbol>
+            <symbol id="srch" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-4-4" />
+            </symbol>
+            <symbol id="user" viewBox="0 0 24 24">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" />
+            </symbol>
+            <symbol id="arr" viewBox="0 0 24 24">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+            </symbol>
+            <symbol id="send" viewBox="0 0 24 24">
+                <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-20 border-b border-line bg-bg/95 backdrop-blur">
+        <div class="mx-auto max-w-[1440px] px-[18px] md:px-10">
+            <!-- desktop -->
+            <div class="hidden h-[72px] items-center gap-10 md:flex">
+                <a href="#" class="flex items-center gap-2 font-dis text-[22px] font-black tracking-tight">
+                    <i
+                        class="grid h-[34px] w-[34px] place-items-center rounded-lg bg-g shadow-[0_0_16px_rgba(0,255,102,.4)]">
+                        <svg class="h-[18px] w-[18px] fill-none stroke-bg stroke-[2.2]" viewBox="0 0 24 24">
+                            <use href="#chip" />
+                        </svg>
+                    </i>
+                    CIRCUIT<span class="text-g">FLY</span>
+                </a>
+                <label
+                    class="flex h-[46px] max-w-[560px] flex-1 items-center gap-3 rounded-xl border border-line bg-panel px-4 text-sm text-neutral-500">
+                    <svg class="h-[18px] w-[18px] fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24">
+                        <use href="#srch" />
+                    </svg>
+                    <input dir="rtl" class="flex-1 bg-transparent text-white outline-none placeholder:text-neutral-500"
+                        placeholder="جستجوی قطعات، کنترلرها و تجهیزات پهپاد...">
+                </label>
+                <div class="mr-auto flex gap-6">
+                    <a href="#" class="relative flex flex-col items-center gap-1 text-[11px] text-neutral-400"><svg
+                            class="h-[22px] w-[22px] fill-none stroke-neutral-300 stroke-[1.8]" viewBox="0 0 24 24">
+                            <use href="#user" />
+                        </svg>حساب کاربری</a>
+                    <a href="#" class="relative flex flex-col items-center gap-1 text-[11px] text-neutral-400"><svg
+                            class="h-[22px] w-[22px] fill-none stroke-neutral-300 stroke-[1.8]" viewBox="0 0 24 24">
+                            <use href="#heart" />
+                        </svg><b
+                            class="absolute -left-0.5 -top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full bg-g text-[9px] text-black">0</b>علاقه‌مندی‌ها</a>
+                    <a href="#" class="relative flex flex-col items-center gap-1 text-[11px] text-neutral-400"><svg
+                            class="h-[22px] w-[22px] fill-none stroke-neutral-300 stroke-[1.8]" viewBox="0 0 24 24">
+                            <use href="#cart" />
+                        </svg><b
+                            class="absolute -left-0.5 -top-1.5 grid h-[15px] w-[15px] place-items-center rounded-full bg-g text-[9px] text-black">3</b>سبد
+                        خرید</a>
+                </div>
+            </div>
+            <nav class="hidden justify-center gap-[34px] pb-3.5 pt-3 text-[13px] font-medium text-neutral-200 md:flex">
+                <a href="#" class="text-g">⚡ تازه‌رسیده‌ها</a><a href="#">میکروکنترلرها</a><a href="#">سنسورها و
+                    ماژول‌ها</a><a href="#">فریم پهپاد</a><a href="#">موتورها و کنترلرها</a><a href="#">لحیم‌کاری و
+                    ابزار</a><a href="#">کیت‌های DIY</a><a href="#" class="text-neutral-500">وبلاگ</a>
+            </nav>
+            <!-- mobile -->
+            <div class="md:hidden">
+                <div class="flex h-[60px] items-center justify-between">
+                    <svg class="h-6 w-6 fill-none stroke-neutral-300 stroke-2" viewBox="0 0 24 24">
+                        <path d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <a href="#" class="flex items-center gap-2 font-dis text-[19px] font-black tracking-tight">
+                        <i
+                            class="grid h-[30px] w-[30px] place-items-center rounded-lg bg-g shadow-[0_0_16px_rgba(0,255,102,.4)]">
+                            <svg class="h-[18px] w-[18px] fill-none stroke-bg stroke-[2.2]" viewBox="0 0 24 24">
+                                <use href="#chip" />
+                            </svg>
+                        </i>
+                        CIRCUIT<span class="text-g">FLY</span>
+                    </a>
+                    <div class="relative flex gap-4">
+                        <svg class="h-6 w-6 fill-none stroke-neutral-300 stroke-2" viewBox="0 0 24 24">
+                            <use href="#cart" />
+                        </svg>
+                        <b
+                            class="absolute -top-1 left-3 grid h-[15px] w-[15px] place-items-center rounded-full bg-g text-[9px] text-black">3</b>
+                        <svg class="h-6 w-6 fill-none stroke-neutral-300 stroke-2" viewBox="0 0 24 24">
+                            <use href="#user" />
+                        </svg>
+                    </div>
+                </div>
+                <label
+                    class="mb-3.5 flex h-[42px] items-center gap-2.5 rounded-xl border border-line bg-panel px-3.5 text-sm">
+                    <svg class="h-[17px] w-[17px] fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24">
+                        <use href="#srch" />
+                    </svg>
+                    <input dir="rtl" class="flex-1 bg-transparent text-white outline-none placeholder:text-neutral-300"
+                        placeholder="جستجوی تجهیزات و قطعات پهپاد...">
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="relative mx-auto max-w-[1440px] px-[18px] md:px-10">
+            <div
+                class="pointer-events-none absolute right-0 top-[10%] hidden h-4/5 w-[55%] bg-[radial-gradient(closest-side,rgba(0,255,102,.16),transparent)] md:block">
+            </div>
+            <div
+                class="relative flex flex-col items-center py-10 text-center md:grid md:grid-cols-2 md:content-center md:items-start md:gap-x-12 md:pb-24 md:pt-10 md:text-right">
+                <span
+                    class="inline-flex items-center gap-2 rounded-full border border-g/25 bg-g/10 px-3 py-1.5 text-[11px] font-bold tracking-wider text-g before:h-1.5 before:w-1.5 before:rounded-full before:bg-g md:col-start-1 md:justify-self-start">تجهیزات
+                    حرفه‌ای FPV</span>
+                <h1
+                    class="my-6 font-dis text-[30px] font-black uppercase leading-[1.08] md:col-start-1 md:text-[60px] md:tracking-tight">
+                    پروازت را <em class="block italic text-g [text-shadow:0_0_28px_rgba(0,255,102,.35)]">متحول کن</em>
+                </h1>
+                <div
+                    class="mb-7 h-[216px] w-[216px] overflow-hidden rounded bg-[#0d0d0d] shadow-[0_0_50px_rgba(0,255,102,.35)] md:col-start-2 md:row-span-7 md:row-start-1 md:mb-0 md:aspect-square md:h-auto md:max-h-[460px] md:w-full md:self-center">
+                    <svg viewBox="0 0 400 400" class="h-full w-full" preserveAspectRatio="xMidYMid slice"
+                        aria-label="تصویر کنترلر پرواز">
+                        <defs>
+                            <radialGradient id="boardBg" cx=".5" cy=".5" r=".7">
+                                <stop offset="0" stop-color="#16201a" />
+                                <stop offset="1" stop-color="#090909" />
+                            </radialGradient>
+                        </defs>
+                        <rect width="400" height="400" fill="url(#boardBg)" />
+                        <g transform="rotate(-8 200 200)">
+                            <rect x="70" y="70" width="260" height="260" rx="10" fill="#0c0c0c" stroke="#2a2a2a"
+                                stroke-width="3" />
+                            <rect x="140" y="140" width="120" height="120" rx="6" fill="#1b1b1b" stroke="#3a3a3a" />
+                            <rect x="165" y="165" width="70" height="70" fill="#101010" stroke="#444" />
+                            <text x="200" y="108" fill="#d8b04a" font-family="Arial" font-weight="900" font-size="20"
+                                text-anchor="middle">KAKUTE F7</text>
+                            <g fill="#111" stroke="#e8c765" stroke-width="3">
+                                <circle cx="90" cy="90" r="14" />
+                                <circle cx="310" cy="90" r="14" />
+                                <circle cx="90" cy="310" r="14" />
+                                <circle cx="310" cy="310" r="14" />
+                            </g>
+                            <g fill="#c9a24b">
+                                <rect x="84" y="140" width="22" height="9" rx="4" />
+                                <rect x="84" y="165" width="22" height="9" rx="4" />
+                                <rect x="84" y="190" width="22" height="9" rx="4" />
+                                <rect x="84" y="215" width="22" height="9" rx="4" />
+                                <rect x="294" y="140" width="22" height="9" rx="4" />
+                                <rect x="294" y="165" width="22" height="9" rx="4" />
+                                <rect x="294" y="190" width="22" height="9" rx="4" />
+                                <rect x="294" y="215" width="22" height="9" rx="4" />
+                            </g>
+                            <rect x="170" y="290" width="60" height="26" rx="5" fill="#bfbfbf" />
+                            <g fill="#00ff66">
+                                <circle cx="124" cy="120" r="4" />
+                                <circle cx="268" cy="272" r="4" />
+                            </g>
+                        </g>
+                    </svg></div>
+                <p
+                    class="mb-7 max-w-[300px] text-[12.5px] leading-relaxed text-neutral-300 md:col-start-1 md:mb-0 md:max-w-[430px] md:text-[17px] md:leading-[1.6] md:text-neutral-300">
+                    کنترلر پرواز Apex-G4 با تأخیر بسیار کم، نمایشگر OSD با وضوح 4K و سیستم پایدارسازی هوشمند؛ برای
+                    تجربه‌ای حرفه‌ای از پرواز FPV.</p>
+                <div class="hidden gap-3 py-[26px] md:col-start-1 md:flex"><span
+                        class="flex items-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-[9px] text-xs"><svg
+                            class="h-[13px] w-[13px] fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24">
+                            <use href="#chip" />
+                        </svg>پردازنده G4</span>
+                    <span
+                        class="flex items-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-[9px] text-xs"><svg
+                            class="h-[13px] w-[13px] fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24">
+                            <path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0" />
+                            <circle cx="12" cy="19" r="1" />
+                        </svg>تأخیر بسیار کم</span>
+                    <span
+                        class="flex items-center gap-2 rounded-lg border border-line bg-panel px-3.5 py-[9px] text-xs"><svg
+                            class="h-[13px] w-[13px] fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24">
+                            <path d="M12 21s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z" />
+                            <circle cx="12" cy="9" r="2.5" />
+                        </svg>آماده GPS</span>
+                </div>
+                <div class="flex w-full flex-col gap-3.5 md:col-start-1 md:w-auto md:flex-row">
+                    <a href="#"
+                        class="inline-flex h-[50px] items-center justify-center gap-2.5 rounded-[5px] bg-g px-7 font-dis text-[15px] font-bold text-black shadow-[0_0_22px_rgba(0,255,102,.4)] md:h-12 md:text-sm">خرید
+                        محصول <svg class="h-4 w-4 fill-none stroke-current stroke-[2.4]" viewBox="0 0 24 24">
+                            <use href="#arr" />
+                        </svg></a>
+                    <a href="#"
+                        class="inline-flex h-[50px] items-center justify-center rounded-[5px] border border-neutral-700 bg-white/[.02] px-7 font-dis text-[15px] font-bold md:h-12 md:text-sm">مشاهده
+                        جزئیات</a>
+                </div>
+                <div class="mt-[70px] hidden gap-2 md:col-start-1 md:flex"><i class="h-[3px] w-8 rounded bg-g"></i><i
+                        class="h-[3px] w-[7px] rounded bg-neutral-700"></i><i
+                        class="h-[3px] w-[7px] rounded bg-neutral-700"></i><i
+                        class="h-[3px] w-[7px] rounded bg-neutral-700"></i></div>
+            </div>
+        </section>
+
+        <!-- CATEGORIES -->
+        <section class="border-t border-line pb-[50px] pt-[30px] md:pb-[60px] md:pt-[50px]">
+            <div class="mx-auto max-w-[1440px] px-[18px] md:px-10">
+                <div class="mb-4 flex justify-between text-[10px] font-bold tracking-widest text-neutral-500 md:hidden">
+                    <span>دسته‌بندی محصولات</span><a href="#" class="text-g">ورق بزنید ←</a></div>
+                <div
+                    class="noscroll flex max-w-full gap-3 overflow-x-auto md:grid md:grid-cols-7 md:gap-5 md:overflow-visible">
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <use href="#chip" />
+                            </svg></span>
+                        <span class="md:hidden">چیپ‌ها</span><span class="hidden md:inline">کنترلرها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"></span>
+                        <span class="md:hidden">سنسورها</span><span class="hidden md:inline">سنسورها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9" />
+                            </svg></span>
+                        <span class="md:hidden">فریم‌ها</span><span class="hidden md:inline">فریم‌ها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="2" />
+                                <path
+                                    d="M12 10C12 5 15 3 17 5s0 5-5 5zM14 12c5 0 7 3 5 5s-5 0-5-5zM12 14c0 5-3 7-5 5s0-5 5-5zM10 12C5 12 3 9 5 7s5 0 5 5z" />
+                            </svg></span>
+                        <span class="md:hidden">موتورها</span><span class="hidden md:inline">موتورها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <path d="M14 6l4 4M4 20l9-9M15 3l6 6-3 3-6-6zM3 9l5-5 3 3-5 5z" />
+                            </svg></span>
+                        <span class="md:hidden">ابزارها</span><span class="hidden md:inline">ابزارها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <path d="M3 8l9-5 9 5v9l-9 5-9-5zM3 8l9 5 9-5M12 13v9" />
+                            </svg></span>
+                        <span class="md:hidden">کیت‌ها</span><span class="hidden md:inline">کیت‌ها</span>
+                    </a>
+                    <a href="#"
+                        class="flex h-[88px] w-[86px] shrink-0 flex-col items-center justify-center gap-2.5 rounded-[10px] border border-line bg-panel text-[9px] font-bold tracking-widest md:h-[130px] md:w-auto md:gap-4 md:rounded-xl md:text-[11px]">
+                        <span
+                            class="grid h-[38px] w-[38px] place-items-center rounded-[10px] bg-panel2 md:h-[50px] md:w-[50px]"><svg
+                                class="h-5 w-5 fill-none stroke-neutral-500 stroke-[1.8] md:h-6 md:w-6"
+                                viewBox="0 0 24 24">
+                                <circle cx="5" cy="12" r="1.5" />
+                                <circle cx="12" cy="12" r="1.5" />
+                                <circle cx="19" cy="12" r="1.5" />
+                            </svg></span>
+                        <span class="md:hidden">بیشتر</span><span class="hidden md:inline">بیشتر</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- OFFERS / ARRIVALS -->
+        <section class="mx-auto max-w-[1440px] px-[18px] pt-[34px] md:px-10 md:pt-[60px]">
+            <div class="mb-5 flex items-center justify-between md:mb-[34px]">
+                <h2
+                    class="border-r-[3px] border-g pr-3.5 font-dis text-[21px] font-black uppercase leading-none md:text-[28px]">
+                    پیشنهادهای <span class="text-g">ویژه</span></h2><a href="#"
+                    class="text-[10px] font-semibold uppercase text-neutral-400 md:text-xs">مشاهده همه ←</a>
+            </div>
+            <div class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <ellipse cx="50" cy="78" rx="30" ry="8" fill="#222" />
+                            <rect x="26" y="40" width="48" height="38" rx="6" fill="#2c2c2c" />
+                            <rect x="26" y="52" width="48" height="12" fill="#b4602a" />
+                            <ellipse cx="50" cy="40" rx="24" ry="9" fill="#444" />
+                            <ellipse cx="50" cy="38" rx="9" ry="4" fill="#111" />
+                            <rect x="46" y="12" width="8" height="26" fill="#999" />
+                        </svg>
+                        <div class="absolute right-2 top-2 flex flex-col items-start gap-[5px]"><span
+                                class="hidden rounded-[3px] bg-red-500 text-white px-[7px] py-[3px] text-[10px] font-bold md:block">فروش
+                                ویژه</span><span
+                                class="rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">-20%</span>
+                        </div>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid">
+                            <svg class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">موتور
+                            براشلس</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            موتور براشلس Apex-X 2306 2450KV</h3>
+                        <div class="mt-auto flex items-end justify-between">
+                            <div><span class="block text-[10px] text-neutral-600 line-through">$۲۹٫۹۹</span><span
+                                    class="font-dis text-[17px] font-bold text-g md:text-xl">$۲۳٫۹۹</span></div>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8">
+                                <span class="text-xl leading-none text-black md:hidden">+</span>
+                                <svg class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <path d="M18 22L82 78M82 22L18 78" stroke="#555" stroke-width="5" stroke-linecap="round" />
+                            <rect x="38" y="42" width="24" height="16" rx="3" fill="#333" />
+                            <g fill="#222" stroke="#555" stroke-width="2">
+                                <circle cx="18" cy="22" r="7" />
+                                <circle cx="82" cy="22" r="7" />
+                                <circle cx="18" cy="78" r="7" />
+                                <circle cx="82" cy="78" r="7" />
+                            </g>
+                        </svg>
+                        <div class="absolute right-2 top-2 flex flex-col items-start gap-[5px]"><span
+                                class="rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">-15%</span>
+                        </div>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid">
+                            <svg class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">فریم
+                            پهپاد</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            فریم فیبر کربن فوق‌سبک Ghost-5</h3>
+                        <div class="mt-auto flex items-end justify-between">
+                            <div><span class="block text-[10px] text-neutral-600 line-through">$۵۴٫۰۰</span><span
+                                    class="font-dis text-[17px] font-bold text-g md:text-xl">$۴۵٫۹۰</span></div>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8">
+                                <span class="text-xl leading-none text-black md:hidden">+</span>
+                                <svg class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <rect x="14" y="14" width="72" height="72" rx="4" fill="#181818" stroke="#444" />
+                            <rect x="30" y="30" width="40" height="40" fill="#2b2b2b" stroke="#666" />
+                            <g fill="#c9a24b">
+                                <circle cx="20" cy="20" r="3.5" />
+                                <circle cx="80" cy="20" r="3.5" />
+                                <circle cx="20" cy="80" r="3.5" />
+                                <circle cx="80" cy="80" r="3.5" />
+                            </g>
+                        </svg>
+                        <div class="absolute right-2 top-2 flex flex-col items-start gap-[5px]"><span
+                                class="rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">-10%</span>
+                        </div>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid">
+                            <svg class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">کنترلر
+                            سرعت ESC</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            کنترلر سرعت چهاردر‌یک Volt-Edge 60A</h3>
+                        <div class="mt-auto flex items-end justify-between">
+                            <div><span class="block text-[10px] text-neutral-600 line-through">$۸۹٫۰۰</span><span
+                                    class="font-dis text-[17px] font-bold text-g md:text-xl">$۷۹٫۹۹</span></div>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8">
+                                <span class="text-xl leading-none text-black md:hidden">+</span>
+                                <svg class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <path
+                                d="M10 38c0-10 20-16 40-16s40 6 40 16v22c0 8-12 14-24 14l-8-8H42l-8 8c-12 0-24-6-24-14z"
+                                fill="#20242c" stroke="#3a4150" stroke-width="2" />
+                            <path d="M22 44h56" stroke="#2b7bff" stroke-width="3" opacity=".7" />
+                        </svg>
+                        <div class="absolute right-2 top-2 flex flex-col items-start gap-[5px]"><span
+                                class="hidden rounded-[3px] bg-blue-600 text-white px-[7px] py-[3px] text-[10px] font-bold md:block">بازسازی‌شده</span><span
+                                class="rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">-30%</span>
+                        </div>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid">
+                            <svg class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">تجهیزات
+                            تصویری</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            عینک آنالوگ FPV مدل SkyView V2</h3>
+                        <div class="mt-auto flex items-end justify-between">
+                            <div><span class="block text-[10px] text-neutral-600 line-through">$۱۹۹٫۰۰</span><span
+                                    class="font-dis text-[17px] font-bold text-g md:text-xl">$۱۳۹٫۳۰</span></div>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8">
+                                <span class="text-xl leading-none text-black md:hidden">+</span>
+                                <svg class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <section class="mx-auto max-w-[1440px] px-[18px] pt-[34px] md:px-10 md:pt-[60px]">
+            <div class="mb-5 flex items-center justify-between md:mb-[34px]">
+                <h2
+                    class="border-r-[3px] border-g pr-3.5 font-dis text-[21px] font-black uppercase leading-none md:text-[28px]">
+                    تازه‌<span class="text-g">رسیده‌ها</span></h2><a href="#"
+                    class="text-[10px] font-semibold uppercase text-neutral-400 md:text-xs">مشاهده <span
+                        class="hidden md:inline">مجموعه</span> ←</a>
+            </div>
+            <div class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <rect x="26" y="8" width="48" height="84" rx="4" fill="#1d1d1d" stroke="#444" />
+                            <rect x="36" y="20" width="28" height="26" fill="#777" />
+                            <circle cx="50" cy="64" r="8" fill="#111" stroke="#666" />
+                        </svg>
+                        <span
+                            class="absolute right-2 top-2 rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">جدید</span>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid"><svg
+                                class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg></button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">میکروکنترلرها</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            برد توسعه ESP32-S3 با دوربین داخلی</h3>
+                        <div class="mt-auto flex items-end justify-between"><span
+                                class="font-dis text-[17px] font-bold text-g md:text-xl">$۱۸٫۵۰</span>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8"><span
+                                    class="text-xl leading-none text-black md:hidden">+</span><svg
+                                    class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </article>
+                <article class="flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <rect x="8" y="28" width="84" height="46" rx="5" fill="#1b2a14" stroke="#4a6" /><text x="22"
+                                y="60" fill="#d8ffd0" font-size="24" font-weight="900">6S</text><text x="52" y="58"
+                                fill="#aaa" font-size="10">1500</text>
+                        </svg>
+                        <span
+                            class="absolute right-2 top-2 rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">جدید</span>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid"><svg
+                                class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg></button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">سیستم‌های
+                            تغذیه</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            باتری لیتیومی T-Power ظرفیت 1500mAh مدل 6S</h3>
+                        <div class="mt-auto flex items-end justify-between"><span
+                                class="font-dis text-[17px] font-bold text-g md:text-xl">$۳۴٫۹۹</span>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8"><span
+                                    class="text-xl leading-none text-black md:hidden">+</span><svg
+                                    class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="hidden md:flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <rect x="8" y="26" width="64" height="12" rx="3" transform="rotate(18 8 26)" fill="#2e2e2e"
+                                stroke="#666" />
+                            <rect x="42" y="64" width="46" height="4" transform="rotate(18 42 64)" fill="#bbb" />
+                        </svg>
+                        <span
+                            class="absolute right-2 top-2 rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">جدید</span>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid"><svg
+                                class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg></button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">ابزارها</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            هویه هوشمند OLED مدل TS101</h3>
+                        <div class="mt-auto flex items-end justify-between"><span
+                                class="font-dis text-[17px] font-bold text-g md:text-xl">$۶۹٫۰۰</span>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8"><span
+                                    class="text-xl leading-none text-black md:hidden">+</span><svg
+                                    class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </article>
+                <article
+                    class="hidden md:flex flex-col rounded-xl border border-line bg-panel p-2.5 md:rounded-[14px] md:p-3">
+                    <div
+                        class="relative grid aspect-[1.05] place-items-center overflow-hidden rounded-[10px] bg-[#0b0b0b] md:aspect-[1.1]">
+                        <svg viewBox="0 0 100 100" class="h-auto w-[70%]">
+                            <g fill="#7dff2e">
+                                <path d="M25 25c8-12 16-6 12 6l-5 10z" />
+                                <path d="M25 25c-12 4-10 14 2 12l8-5z" />
+                                <path d="M25 25c0 14 10 14 12 2l-2-8z" />
+                            </g>
+                            <g transform="translate(45 0)" fill="#7dff2e">
+                                <path d="M25 25c8-12 16-6 12 6l-5 10z" />
+                                <path d="M25 25c-12 4-10 14 2 12l8-5z" />
+                            </g>
+                            <g transform="translate(0 45)" fill="#7dff2e">
+                                <path d="M25 25c8-12 16-6 12 6l-5 10z" />
+                                <path d="M25 25c-12 4-10 14 2 12l8-5z" />
+                            </g>
+                        </svg>
+                        <span
+                            class="absolute right-2 top-2 rounded-[3px] bg-g px-[7px] py-[3px] text-[10px] font-bold text-black">جدید</span>
+                        <button type="button" aria-label="افزودن به علاقه‌مندی‌ها"
+                            class="absolute left-2 top-2 hidden h-6 w-6 place-items-center rounded-full bg-black/60 md:grid"><svg
+                                class="h-3 w-3 fill-none stroke-white stroke-2" viewBox="0 0 24 24">
+                                <use href="#heart" />
+                            </svg></button>
+                    </div>
+                    <div class="flex flex-1 flex-col px-1 pb-0.5 pt-3 md:px-1.5 md:pb-1.5 md:pt-4">
+                        <span
+                            class="hidden text-[10px] font-bold uppercase tracking-wider text-neutral-500 md:block">لوازم
+                            جانبی</span>
+                        <h3
+                            class="mb-2 mt-3 text-[12.5px] font-semibold leading-snug md:mb-3.5 md:mt-2 md:text-base md:leading-[1.3]">
+                            ملخ سه‌پره Neon-Flow 5143 (بسته ۴ عددی)</h3>
+                        <div class="mt-auto flex items-end justify-between"><span
+                                class="font-dis text-[17px] font-bold text-g md:text-xl">$۵٫۹۹</span>
+                            <button type="button" aria-label="افزودن به سبد خرید"
+                                class="grid h-[30px] w-[30px] place-items-center rounded-[7px] bg-g md:h-8 md:w-8"><span
+                                    class="text-xl leading-none text-black md:hidden">+</span><svg
+                                    class="hidden h-4 w-4 fill-none stroke-black stroke-[2.2] md:block"
+                                    viewBox="0 0 24 24">
+                                    <use href="#cart" />
+                                </svg></button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- TRUST -->
+        <section class="mt-[50px] border-t border-line md:mt-20">
+            <div
+                class="mx-auto grid max-w-[1440px] grid-cols-2 gap-x-2.5 gap-y-[34px] px-[18px] py-[54px] md:grid-cols-4 md:gap-5 md:px-10 md:py-[50px]">
+                <div class="flex flex-col items-center gap-2.5 text-center md:flex-row md:gap-3.5 md:text-right">
+                    <i
+                        class="grid h-[46px] w-[46px] shrink-0 place-items-center rounded-full bg-g/10 md:h-[42px] md:w-[42px]">
+                        <svg class="h-5 w-5 fill-none stroke-g stroke-2" viewBox="0 0 24 24">
+                            <path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" />
+                        </svg>
+                    </i>
+                    <div><b
+                            class="block text-[11px] uppercase tracking-wider md:text-sm md:normal-case md:tracking-normal">پرداخت
+                            امن</b><small class="text-[9px] text-neutral-500 md:text-[11px]">رمزنگاری ۱۲۸ بیتی</small>
+                    </div>
+                </div>
+                <div class="flex flex-col items-center gap-2.5 text-center md:flex-row md:gap-3.5 md:text-right">
+                    <i
+                        class="grid h-[46px] w-[46px] shrink-0 place-items-center rounded-full bg-g/10 md:h-[42px] md:w-[42px]">
+                        <svg class="h-5 w-5 fill-none stroke-g stroke-2" viewBox="0 0 24 24">
+                            <path d="M2 6h12v10H2zM14 9h4l4 4v3h-8z" />
+                            <circle cx="7" cy="18" r="2" />
+                            <circle cx="17" cy="18" r="2" />
+                        </svg>
+                    </i>
+                    <div><b
+                            class="block text-[11px] uppercase tracking-wider md:text-sm md:normal-case md:tracking-normal">ارسال
+                            سریع</b><small class="text-[9px] text-neutral-500 md:text-[11px]">ارسال سریع به سراسر
+                            کشور</small></div>
+                </div>
+                <div class="flex flex-col items-center gap-2.5 text-center md:flex-row md:gap-3.5 md:text-right">
+                    <i
+                        class="grid h-[46px] w-[46px] shrink-0 place-items-center rounded-full bg-g/10 md:h-[42px] md:w-[42px]">
+                        <svg class="h-5 w-5 fill-none stroke-g stroke-2" viewBox="0 0 24 24">
+                            <path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4" />
+                        </svg>
+                    </i>
+                    <div><b
+                            class="block text-[11px] uppercase tracking-wider md:text-sm md:normal-case md:tracking-normal">۷
+                            روز ضمانت بازگشت</b><small class="text-[9px] text-neutral-500 md:text-[11px]">بدون دردسر و
+                            پرسش اضافه</small></div>
+                </div>
+                <div class="flex flex-col items-center gap-2.5 text-center md:flex-row md:gap-3.5 md:text-right">
+                    <i
+                        class="grid h-[46px] w-[46px] shrink-0 place-items-center rounded-full bg-g/10 md:h-[42px] md:w-[42px]">
+                        <svg class="h-5 w-5 fill-none stroke-g stroke-2" viewBox="0 0 24 24">
+                            <path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v5H4zM17 14h3v5h-3z" />
+                        </svg>
+                    </i>
+                    <div><b
+                            class="block text-[11px] uppercase tracking-wider md:text-sm md:normal-case md:tracking-normal">پشتیبانی
+                            فنی</b><small class="text-[9px] text-neutral-500 md:text-[11px]">پشتیبانی تخصصی
+                            مهندسان</small></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-line bg-[#0c0c0c] pb-7 pt-[50px]">
+        <div class="mx-auto max-w-[1440px] px-[18px] md:px-10">
+            <div
+                class="flex flex-col items-center text-center md:grid md:grid-cols-[2fr_1fr_1fr_1.2fr] md:items-start md:gap-10 md:text-right">
+                <div class="flex flex-col items-center md:items-start">
+                    <a href="#" class="flex items-center gap-2 font-dis text-[19px] font-black tracking-tight">
+                        <i
+                            class="grid h-[30px] w-[30px] place-items-center rounded-lg bg-g shadow-[0_0_16px_rgba(0,255,102,.4)]">
+                            <svg class="h-[18px] w-[18px] fill-none stroke-bg stroke-[2.2]" viewBox="0 0 24 24">
+                                <use href="#chip" />
+                            </svg>
+                        </i>
+                        CIRCUIT<span class="text-g">FLY</span>
+                    </a>
+                    <p
+                        class="mx-auto my-4 max-w-[240px] text-[11px] leading-[1.7] text-neutral-500 md:mx-0 md:my-[18px] md:max-w-[300px] md:text-[13px]">
+                        مرجع تخصصی قطعات پهپاد، میکروکنترلرها و کیت‌های الکترونیکی؛ ساخته‌شده برای مهندسان و به دست
+                        مهندسان.</p>
+                    <div class="flex gap-2.5"><a href="#" aria-label="Facebook"
+                            class="grid h-[34px] w-[34px] place-items-center rounded-lg bg-panel2">f</a>
+                        <a href="#" aria-label="Twitter"
+                            class="grid h-[34px] w-[34px] place-items-center rounded-lg bg-panel2">♥</a>
+                        <a href="#" aria-label="Instagram"
+                            class="grid h-[34px] w-[34px] place-items-center rounded-lg bg-panel2">◎</a>
+                        <a href="#" aria-label="Youtube"
+                            class="hidden h-[34px] w-[34px] place-items-center rounded-lg bg-panel2 md:grid">▶</a>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <h4 class="mb-[22px] font-dis text-[13px] tracking-widest">فروشگاه</h4>
+                    <ul class="grid gap-3.5 text-[13px] text-neutral-500">
+                        <li>میکروکنترلرها</li>
+                        <li>قطعات پهپاد</li>
+                        <li>کیت‌های DIY</li>
+                        <li>ابزار و لحیم‌کاری</li>
+                        <li>تازه‌رسیده‌ها</li>
+                    </ul>
+                </div>
+                <div class="hidden md:block">
+                    <h4 class="mb-[22px] font-dis text-[13px] tracking-widest">پشتیبانی</h4>
+                    <ul class="grid gap-3.5 text-[13px] text-neutral-500">
+                        <li>پیگیری سفارش</li>
+                        <li>قوانین ارسال</li>
+                        <li>مرجوعی کالا</li>
+                        <li>مستندات فنی</li>
+                        <li>تماس با ما</li>
+                    </ul>
+                </div>
+                <div
+                    class="mt-[34px] w-full rounded-2xl border border-line bg-panel px-[18px] py-7 md:mt-0 md:border-0 md:bg-transparent md:p-0">
+                    <h4 class="mb-[18px] font-dis text-[13px] tracking-widest md:mb-[22px]"><span class="md:hidden">از
+                            تازه‌ها باخبر شو</span><span class="hidden md:inline">عضویت در خبرنامه</span></h4>
+                    <small class="mb-3.5 hidden text-[11px] leading-normal text-neutral-500 md:block">برای دریافت
+                        تازه‌ترین اخبار دنیای فناوری و تخفیف‌های ویژه عضو شوید.</small>
+                    <div class="flex h-11 items-center gap-2 rounded-lg border border-line bg-bg px-3.5 md:bg-panel">
+                        <input
+                            class="min-w-0 flex-1 bg-transparent text-[13px] text-white outline-none placeholder:text-neutral-300"
+                            placeholder="نشانی ایمیل"><svg class="h-4 w-4 fill-g" viewBox="0 0 24 24">
+                            <use href="#send" />
+                        </svg></div>
+                </div>
+            </div>
+            <div
+                class="mt-10 flex flex-col items-center justify-between gap-[18px] border-t border-line pt-[26px] text-[10px] tracking-wider text-neutral-600 md:mt-[50px] md:flex-row">
+                <span>© ۲۰۲۴ فناوری‌های CIRCUITFLY. <span class="hidden md:inline">تمامی حقوق محفوظ است.</span></span>
+                <div class="flex gap-3"><i class="h-5 w-[30px] rounded-[3px] bg-neutral-800"></i><i
+                        class="h-5 w-[30px] rounded-[3px] bg-neutral-800"></i><i
+                        class="h-5 w-[30px] rounded-[3px] bg-neutral-800"></i><i
+                        class="hidden h-5 w-[30px] rounded-[3px] bg-neutral-800 md:block"></i></div>
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

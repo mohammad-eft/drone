@@ -59,7 +59,7 @@ function updateCartState() {
         updateCartBadge();
     }
 
-    
+
 }
 
 /* =========================================================
@@ -128,10 +128,12 @@ function getAddToCartHTML(type, count) {
     if (Number(count) <= 0) {
         return `
             <button type="button" disabled
-                class="w-full h-12 rounded-xl bg-[#202522]
-                       border border-[#2A302C] text-[#929B95]
-                       text-xs font-bold cursor-not-allowed">
-                عدم موجودی
+                aria-label="ناموجود"
+                title="ناموجود"
+                class="grid h-[30px] w-[30px] shrink-0 place-items-center
+                       rounded-[7px] bg-neutral-700 text-neutral-400
+                       cursor-not-allowed md:h-8 md:w-8">
+                <span class="text-base leading-none">×</span>
             </button>
         `;
     }
@@ -139,19 +141,21 @@ function getAddToCartHTML(type, count) {
     return `
         <button type="button"
             onclick="${functionName}(this)"
-            class="product-primary-btn w-full h-12 rounded-xl
-                   flex items-center justify-center gap-1.5
-                   font-bold text-xs">
+            aria-label="افزودن به سبد خرید"
+            title="افزودن به سبد خرید"
+            class="grid h-[30px] w-[30px] shrink-0 place-items-center
+                   rounded-[7px] bg-g text-black
+                   transition-all duration-200 hover:brightness-110
+                   active:scale-95 disabled:cursor-wait disabled:opacity-70
+                   md:h-8 md:w-8">
 
-            <svg class="size-4 shrink-0" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
-                <circle cx="10" cy="20" r="1"/>
-                <circle cx="18" cy="20" r="1"/>
-                <path d="M14 9v5M11.5 11.5h5"/>
+            <span class="text-xl leading-none md:hidden">+</span>
+
+            <svg class="hidden h-4 w-4 fill-none stroke-current
+                        stroke-[2.2] md:block"
+                 viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#cart"/>
             </svg>
-
-            <span>افزودن به سبد خرید</span>
 
         </button>
     `;
@@ -237,20 +241,8 @@ function addToCart(btn) {
     const originalHTML = btn.innerHTML;
 
     btn.innerHTML = `
-        <span class="flex items-center justify-center gap-2">
-            <span class="relative flex items-center justify-center w-5 h-5">
-                <span class="absolute inset-0 rounded-full border-[2.5px]
-                            border-[#06140B]/20"></span>
-
-                <span class="absolute inset-0 rounded-full border-[2.5px]
-                            border-[#06140B] border-t-transparent
-                            animate-spin"></span>
-            </span>
-
-            <span class="text-xs font-bold text-[#06140B]">
-                در حال افزودن...
-            </span>
-        </span>`
+        <span class="h-4 w-4 rounded-full border-2 border-black/25
+                     border-t-black animate-spin" aria-label="در حال افزودن"></span>`
     $.ajax({
 
         url: api + 'findProduct/' + productId,
@@ -476,9 +468,8 @@ function addPackToCart(btn) {
     const originalHTML = btn.innerHTML;
 
     btn.innerHTML = `
-        <div class="w-5 h-5 border-2 border-[#06140B]
-                    border-t-transparent rounded-full animate-spin">
-        </div>
+        <span class="h-4 w-4 rounded-full border-2 border-black/25
+                     border-t-black animate-spin" aria-label="در حال افزودن"></span>
     `;
 
     $.ajax({

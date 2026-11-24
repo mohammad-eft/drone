@@ -1,12 +1,14 @@
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="bg-bg">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <script src="{{ asset('js/tailwindv03.js') }}"></script>
+    
     <script src="{{ asset('js/tailwind.js') }}"></script>
+    <script>tailwind.config={theme:{extend:{colors:{bg:'#0a0a0a',panel:'#141414',panel2:'#1a1a1a',line:'#262626',g:'#00ff66'}}}}</script>
     <script src="{{ asset('js/jquery.js') }}"></script>
 
     <link rel="shortcut icon" href="{{ asset('icon/faveicon.png') }}" type="image/x-icon">
@@ -17,11 +19,11 @@
 /* ================= CIRCUITFLY HEADER ================= */
 
 :root {
-    --fly-bg: #090a0a;
-    --fly-panel: #171919;
-    --fly-panel-2: #202323;
-    --fly-border: #292d2c;
-    --fly-green: #00f477;
+    --fly-bg: #0a0a0a;
+    --fly-panel: #141414;
+    --fly-panel-2: #1a1a1a;
+    --fly-border: #262626;
+    --fly-green: #00ff66;
     --fly-text: #f5f7f6;
     --fly-muted: #858d8b;
 }
@@ -229,6 +231,9 @@ body {
     }
 }
 
+        body { color-scheme: dark; }
+        /* #headerMenu input { font-family: Vazirmatn, Inter, sans-serif; } */
+        #headerMenu a, #headerMenu button { transition: color .2s ease, background .2s ease; }
     </style>
 
     <title>@yield('title')</title>
@@ -255,7 +260,7 @@ body {
     </script>
 </head>
 
-<body>
+<body class="bg-bg text-white font-ui antialiased overflow-x-clip" dir="rtl">
 
     <header class="w-full flex flex-col justify-start items-center">
 
@@ -273,10 +278,10 @@ body {
 
 
         {{-- Header Menu --}}
-        <div class="w-full bg-white fixed top-0 right-0 z-20 transition-all duration-300"
+        <div class="w-full bg-bg/95 fixed top-0 right-0 z-20 transition-all duration-300 backdrop-blur border-b border-line"
              id="headerMenu">
 
-            <section class="max-w-[1800px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-white">
+            <section class="max-w-[1440px] w-11/12 mx-auto flex flex-col gap-4 justify-start items-center bg-bg">
 
                 <div class="w-full flex justify-between gap-1 items-center pt-3 pb-3 lg:pt-5 lg:pb-2">
 
@@ -367,6 +372,12 @@ body {
 
                     </ul>
 
+
+                    {{-- Search field: همان route جستجوی قبلی --}}
+                    <form action="{{ route('search.page') }}" method="GET" class="hidden md:flex h-[46px] max-w-[560px] flex-1 items-center gap-3 rounded-xl border border-line bg-panel px-4 text-sm text-neutral-500">
+                        <svg class="h-[18px] w-[18px] shrink-0 fill-none stroke-g stroke-[2.2]" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+                        <input type="text" name="title" dir="rtl" class="min-w-0 flex-1 bg-transparent text-white outline-none placeholder:text-neutral-500" placeholder="جستجوی قطعات، کنترلرها و تجهیزات پهپاد...">
+                    </form>
 
                     {{-- Header Actions --}}
                     <div class="w-1/6 h-full flex justify-end items-center gap-5">

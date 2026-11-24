@@ -119,18 +119,17 @@ function getCartQuantityHTML(cart, type) {
 function getAddButtonHTML(type, count) {
 
     const isPack = type === 'pack';
-
     const functionName = isPack ? 'addPackToCart' : 'addToCart';
 
     if (Number(count) <= 0) {
         return `
             <button type="button" disabled
-                class="w-full h-10 px-3 flex justify-center items-center gap-2
-                       rounded-xl bg-[#202522] border border-[#2A302C]
-                       text-[#929B95] text-xs font-bold cursor-not-allowed">
-
-                <span class="w-1.5 h-1.5 rounded-full bg-[#ED4444]"></span>
-                <span>عدم موجودی</span>
+                aria-label="ناموجود"
+                title="ناموجود"
+                class="grid h-[30px] w-[30px] shrink-0 place-items-center
+                       rounded-[7px] bg-neutral-700 text-neutral-400
+                       cursor-not-allowed md:h-8 md:w-8">
+                <span class="text-base leading-none">×</span>
             </button>
         `;
     }
@@ -139,19 +138,21 @@ function getAddButtonHTML(type, count) {
         <button
             type="button"
             onclick="${functionName}(this)"
-            class="product-primary-btn w-full h-10 px-3 rounded-xl
-                   flex justify-center items-center gap-2 font-bold text-xs
-                   transition-all duration-300">
+            aria-label="افزودن به سبد خرید"
+            title="افزودن به سبد خرید"
+            class="grid h-[30px] w-[30px] shrink-0 place-items-center
+                   rounded-[7px] bg-g text-black
+                   transition-all duration-200 hover:brightness-110
+                   active:scale-95 disabled:cursor-wait disabled:opacity-70
+                   md:h-8 md:w-8">
 
-            <svg class="size-4 shrink-0" viewBox="0 0 24 24"
-                 fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M3 3h2l2.2 11.5a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 2-1.6L22 7H6"/>
-                <circle cx="10" cy="20" r="1"/>
-                <circle cx="18" cy="20" r="1"/>
-                <path d="M14 9v5M11.5 11.5h5"/>
+            <span class="text-xl leading-none md:hidden">+</span>
+
+            <svg class="hidden h-4 w-4 fill-none stroke-current
+                        stroke-[2.2] md:block"
+                 viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#cart"/>
             </svg>
-
-            <span>افزودن به سبد خرید</span>
 
         </button>
     `;
