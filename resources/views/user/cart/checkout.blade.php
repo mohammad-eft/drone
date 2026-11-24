@@ -21,8 +21,8 @@
     <form action="{{ route('order.store') }}" method="POST" enctype="multipart/form-data"
         class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 mt-5">
 
-        <div class="lg:col-span-7 xl:col-span-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-            <h2 class="text-lg font-bold mb-6 text-gray-700">صورت حساب و حمل و نقل</h2>
+        <div class="lg:col-span-7 xl:col-span-8 bg-[#191D1B] p-6 rounded-2xl shadow-sm border border-[#2A302C]">
+            <h2 class="text-lg font-bold mb-6 text-[#F4F7F5]">صورت حساب و حمل و نقل</h2>
 
             <div class="space-y-5">
                 @csrf
@@ -32,14 +32,14 @@
                     <div>
                         <label class="block text-sm font-medium mb-2">نام <span class="text-red-500">*</span></label>
                         <input type="text" name="name" value="{{ Auth::check() ? Auth::user()->name : '' }}"
-                            class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                            class="w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                             required>
                     </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">نام خانوادگی <span
                                 class="text-red-500">*</span></label>
                         <input type="text" name="family" value="{{ Auth::check() ? Auth::user()->family : '' }}"
-                            class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                            class="w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                             required>
                     </div>
                 </div>
@@ -50,15 +50,15 @@
                         <label class="block text-sm font-medium mb-2">استان <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <select id="province"
-                                class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) focus:ring-(--bg-dark-green) outline-none cursor-pointer
-               [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
+                                class="w-full bg-[#101412] border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-[#00F477] focus:ring-[#00F477] outline-none cursor-pointer
+               [&>option]:bg-[#191D1B] [&>option]:text-[#F4F7F5]">
                                 @foreach ($provinces as $province)
                                     <option value="{{ $province->id }}" @if (Auth::check() &&
                                             (count(Auth::user()->addresses) && Auth::user()->addresses[0]->city->province->id == $province->id)) selected @endif>
                                         {{ $province->title }}</option>
                                 @endforeach
                             </select>
-                            <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
+                            <div class="absolute left-3 top-3.5 pointer-events-none text-[#929B95]">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,15 +71,15 @@
                         <label class="block text-sm font-medium mb-2">شهر <span class="text-red-500">*</span></label>
                         <div class="relative">
                             <select name="cityId" id="city"
-                                class="w-full bg-gray-100 border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-(--bg-dark-green) focus:ring-(--bg-dark-green) outline-none cursor-pointer
-               [&>option]:bg-(--bg-dark-green) [&>option]:text-white">
+                                class="w-full bg-[#101412] border-none rounded-lg p-3 appearance-none focus:ring-2 focus:ring-[#00F477] focus:ring-[#00F477] outline-none cursor-pointer
+               [&>option]:bg-[#191D1B] [&>option]:text-[#F4F7F5]">
                                 <option disabled>یک شهر انتخاب کنید</option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->id }}" @if (Auth::check() && (count(Auth::user()->addresses) && Auth::user()->addresses[0]->city->id == $city->id)) selected @endif>
                                         {{ $city->title }}</option>
                                 @endforeach
                             </select>
-                            <div class="absolute left-3 top-3.5 pointer-events-none text-gray-500">
+                            <div class="absolute left-3 top-3.5 pointer-events-none text-[#929B95]">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,7 @@
                     <input type="text" name="address"
                         value="{{ Auth::check() ? (count(Auth::user()->addresses) ? Auth::user()->addresses[0]->address : '') : '' }}"
                         placeholder="نام خیابان و پلاک خانه"
-                        class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                        class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                         required>
                 </div>
 
@@ -103,14 +103,14 @@
                     <label class="block text-sm font-medium mb-2">کد پستی (اختیاری)</label>
                     <input type="text" name="postalCode"
                         value="{{ Auth::check() ? (count(Auth::user()->addresses) ? Auth::user()->addresses[0]->postalCode : '') : '' }}"
-                        class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                        class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                         dir="ltr">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">تلفن <span class="text-red-500">*</span></label>
                     <input type="tel" name="phoneNumber" value="{{ Auth::check() ? Auth::user()->phoneNumber : '' }}"
-                        class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                        class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                         required>
                 </div>
 
@@ -119,7 +119,7 @@
                         <label class="block text-sm font-medium mb-2"> رمز عبور <span class="text-red-500">*</span></label>
                         <input type="password" name="password" placeholder="رمز عبور خود را وارد کنید " disabled
                             id="password"
-                            class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none">
+                            class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none">
                     </div>
                 @endif
 
@@ -127,14 +127,14 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">آدرس ایمیل (اختیاری)</label>
                     <input type="email" name="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
-                        class="w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                        class="w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                         dir="ltr">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium mb-2">کد ملی (اختیاری)</label>
                     <input type="text" name="nationalCode" value="{{ Auth::check() ? Auth::user()->nationalCode : '' }}"
-                        class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                        class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                         dir="ltr">
                 </div>
 
@@ -142,19 +142,19 @@
                     <label class="block text-sm font-medium mb-2">توضیحات تکمیلی</label>
                     <textarea rows="4" name="description"
                         placeholder="یادداشت‌ها درباره سفارش شما، برای مثال نکات مهم درباره نحوه تحویل سفارش."
-                        class="in-fa w-full bg-gray-100 border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none resize-none"></textarea>
+                        class="in-fa w-full bg-[#101412] border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none resize-none"></textarea>
                 </div>
 
             </div>
         </div>
 
         <div class="lg:col-span-5 xl:col-span-4">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 sticky top-32">
-                <h2 class="text-lg font-bold mb-6 text-gray-700">سفارش شما</h2>
+            <div class="bg-[#191D1B] p-6 rounded-2xl shadow-sm border border-[#2A302C] sticky top-32">
+                <h2 class="text-lg font-bold mb-6 text-[#F4F7F5]">سفارش شما</h2>
 
-                <div class="border border-gray-200 rounded-lg overflow-hidden mb-6">
+                <div class="border border-[#2A302C] rounded-lg overflow-hidden mb-6">
                     <div
-                        class="flex justify-between bg-gray-50 p-3 border-b border-gray-200 text-sm font-bold text-gray-700">
+                        class="flex justify-between bg-[#202723] p-3 border-b border-[#2A302C] text-sm font-bold text-[#F4F7F5]">
                         <span>محصول</span>
                         <span>جمع جزء</span>
                     </div>
@@ -163,20 +163,20 @@
 
 
 
-                    <div class="flex justify-between p-3 border-b border-gray-200 text-sm font-bold">
+                    <div class="flex justify-between p-3 border-b border-[#2A302C] text-sm font-bold">
                         <span>مجموع</span>
                         <span id="totalPriceCheckout">0</span>
                     </div>
 
-                    <div class="flex justify-between p-3 bg-gray-50 text-sm font-bold text-gray-800">
+                    <div class="flex justify-between p-3 bg-[#202723] text-sm font-bold text-[#F4F7F5]">
                         <span>سود شما از این خرید</span>
-                        <span class="text-(--discount-color)" id="totalDiscountCheckout">0</span>
+                        <span class="text-[#00F477]" id="totalDiscountCheckout">0</span>
                     </div>
                 </div>
 
 
-                <div class="mb-5 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4">
-                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-600">
+                <div class="mb-5 flex items-start gap-3 rounded-xl border border-[#00F477]/20 bg-[#102219] p-4">
+                    <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#00F477]/10 text-[#00F477]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
@@ -185,17 +185,17 @@
                     </div>
 
                     <div class="min-w-0">
-                        <p class="text-sm font-bold text-amber-800">
+                        <p class="text-sm font-bold text-[#BFFFD8]">
                             نیاز به استعلام قیمت دارید؟
                         </p>
 
-                        <p class="mt-1 text-xs leading-6 text-amber-700">
+                        <p class="mt-1 text-xs leading-6 text-[#A8CBB5]">
                             برای اطلاع از قیمت محصولاتی که قیمت آن‌ها در سایت درج نشده است،
                             لطفاً با شماره زیر تماس بگیرید.
                         </p>
 
                         <a href="tel:09142302912"
-                            class="mt-2 inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-sm font-bold text-[#010348] border border-amber-200 transition hover:bg-amber-100 in-fa"
+                            class="mt-2 inline-flex items-center gap-2 rounded-lg bg-[#191D1B] px-3 py-2 text-sm font-bold text-white border border-[#00F477]/20 transition hover:bg-[#00F477]/10 in-fa"
                             dir="ltr">
                             09142302912
                             <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24"
@@ -210,7 +210,7 @@
                 <div class="mb-3">
                     <div class="w-full max-w-[340px] sm:max-w-[380px] md:max-w-[420px] transition-all duration-300 mb-5">
                         <div
-                            class="relative w-full rounded-2xl bg-gradient-to-br from-indigo-800 via-indigo-700 to-purple-800 p-5 sm:p-6 text-white shadow-2xl card-glow overflow-hidden transition hover:shadow-indigo-500/30 duration-300">
+                            class="relative w-full rounded-2xl bg-gradient-to-br from-[#17221C] via-[#101A14] to-[#063B20] p-5 sm:p-6 text-white shadow-2xl card-glow overflow-hidden transition hover:shadow-[#00F477]/20 duration-300">
 
 
 
@@ -222,7 +222,7 @@
 
                                     <div class="flex items-center gap-2">
                                         <div
-                                            class="size-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                                            class="size-10 rounded-full bg-[#191D1B]/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                                             <span class="text-sm font-bold text-white/90">
                                                 <img src="{{ asset('img/meli.png') }}" class="size-10 rounded-full"
                                                     alt="">
@@ -231,14 +231,14 @@
                                         <span class="text-sm font-semibold tracking-wide text-white/90">بانک ملی</span>
                                     </div>
                                     <div
-                                        class="w-10 h-8 rounded-md bg-gradient-to-br from-amber-200 to-amber-400/80 border border-amber-300/50 shadow-inner flex items-center justify-center">
+                                        class="w-10 h-8 rounded-md bg-gradient-to-br from-[#B8FFD1] to-[#00F477]/80 border border-[#00F477]/40 shadow-inner flex items-center justify-center">
                                         <div class="grid grid-cols-3 gap-0.5 w-6 h-5 opacity-60">
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
-                                            <div class="border border-amber-800/30 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
+                                            <div class="border border-[#075D32]/40 rounded-sm"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -322,7 +322,7 @@
                                     </div> --}}
                                     <div class="flex items-center gap-1 opacity-80">
                                         <div
-                                            class="w-6 h-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/20">
+                                            class="w-6 h-6 rounded-full bg-[#191D1B]/20 backdrop-blur-sm flex items-center justify-center border border-white/20">
                                             <span class="text-[8px] font-bold text-white/90">شتاب</span>
                                         </div>
                                     </div>
@@ -343,21 +343,21 @@
                         <label class="block text-sm font-medium mb-2">رسید پرداخت <span
                                 class="text-red-500">*</span></label>
                         <input type="file" dir="ltr" name="receipt"
-                            class="w-full bg-gray-100 cursor-pointer border-none rounded-lg p-3 focus:ring-2 focus:ring-(--bg-dark-green) outline-none"
+                            class="w-full bg-[#101412] cursor-pointer border-none rounded-lg p-3 focus:ring-2 focus:ring-[#00F477] outline-none"
                             required>
                     </div>
                 </div>
 
-                {{-- <div class="bg-gray-100/80 p-4 rounded-lg border border-gray-200 mb-4">
+                {{-- <div class="bg-[#101412]/80 p-4 rounded-lg border border-[#2A302C] mb-4">
                     <div class="flex items-center gap-2 mb-4">
                         <input type="checkbox" id="zarinpal" class="w-4 h-4 text-primary rounded focus:ring-primary border-gray-300" checked>
-                        <label for="zarinpal" class="flex items-center gap-2 cursor-pointer font-bold text-gray-700">
+                        <label for="zarinpal" class="flex items-center gap-2 cursor-pointer font-bold text-[#F4F7F5]">
                             <img src="https://www.zarinpal.com/assets/images/logo/logo.svg" alt="زرین‌پال" class="h-6 w-auto" onerror="this.style.display='none'"> <!-- لوگو آنلاین -->
                             <span class="text-blue-700 hidden">زرین‌پال</span> 
                             پرداخت امن زرین‌پال
                         </label>
                     </div>
-                    <p class="text-xs text-gray-500 leading-5 text-justify">
+                    <p class="text-xs text-[#929B95] leading-5 text-justify">
                         پرداخت امن به وسیله کلیه کارت‌های عضو شتاب از طریق درگاه زرین‌پال.
                         <br>
                         اطلاعات شخصی شما برای پردازش سفارش شما، پشتیبانی از تجربه شما در سراسر این وب سایت و برای اهداف دیگری که در سیاست حفظ حریم خصوصی ذکر شده است استفاده می‌شود.
@@ -365,7 +365,7 @@
                 </div> --}}
 
                 <button
-                    class="w-full bg-(--purple-btn) text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md cursor-pointer">
+                    class="w-full bg-[#00F477] text-[#06140B] hover:bg-[#18FF8A] font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md shadow-[#00F477]/10 cursor-pointer hover:shadow-[#00F477]/20">
                     ثبت
                 </button>
             </div>
